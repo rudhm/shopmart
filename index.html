@@ -28,9 +28,16 @@
         <button class="location-btn" type="button">
           Deliver to: <strong>Mumbai 400001</strong>
         </button>
-        <button class="icon-btn" id="cartButton" type="button" aria-label="Open cart">
+        <button
+          class="icon-btn"
+          id="cartButton"
+          type="button"
+          aria-label="Open cart"
+          aria-controls="cartDrawer"
+          aria-expanded="false"
+        >
           <span class="icon">🛒</span>
-          <span class="badge" id="cartCount">0</span>
+          <span class="badge" id="cartCount" aria-live="polite">0</span>
         </button>
         <button class="btn-outline" type="button">Login / My Account</button>
       </div>
@@ -97,7 +104,7 @@
           <h2>Shop by Category</h2>
           <p>Tap a category to filter products instantly.</p>
         </div>
-        <div class="category-grid" id="categoryGrid"></div>
+        <div class="category-grid" id="categoryGrid" aria-label="Category filters"></div>
       </section>
 
       <!-- Featured / Sale Banner -->
@@ -131,14 +138,26 @@
             </h2>
             <p>Handpicked favorites loved by our shoppers.</p>
           </div>
-          <div class="filter-tabs" id="categoryTabs" role="tablist"></div>
+          <div
+            class="filter-tabs"
+            id="categoryTabs"
+            role="tablist"
+            aria-label="Product categories"
+          ></div>
         </div>
         <div class="product-grid" id="productGrid"></div>
       </section>
     </main>
 
     <!-- Cart Drawer -->
-    <aside class="cart-drawer" id="cartDrawer" aria-label="Cart drawer">
+    <aside
+      class="cart-drawer"
+      id="cartDrawer"
+      aria-label="Cart drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+    >
       <div class="cart-header">
         <h3>Your Cart</h3>
         <button class="icon-btn" id="closeCart" type="button" aria-label="Close cart">

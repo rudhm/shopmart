@@ -282,6 +282,11 @@ const categoryMeta = [
 
 const DELIVERY_THRESHOLD = 499;
 const DELIVERY_FEE = 40;
+const STORAGE_KEYS = {
+  cart: "shopmart_cart",
+  wishlist: "shopmart_wishlist",
+};
+const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 // UI state (in-memory for session persistence)
 const state = {
@@ -309,6 +314,7 @@ const elements = {
   toast: document.getElementById("toast"),
   checkoutButton: document.getElementById("checkoutButton"),
   header: document.getElementById("siteHeader"),
+  carousel: document.getElementById("heroCarousel"),
   prevSlide: document.getElementById("prevSlide"),
   nextSlide: document.getElementById("nextSlide"),
   slides: document.querySelectorAll(".slide"),
@@ -320,12 +326,96 @@ let activeSlideIndex = 0;
 
 const formatPrice = (value) => `₹${value}`;
 
+const getScrollBehavior = () => (motionQuery.matches ? "auto" : "smooth");
+
 const getProductImage = (name) =>
   `https://placehold.co/200x200?text=${encodeURIComponent(name)}`;
+
+const canPersist = () =>
+  typeof window !== "undefined" && Object.prototype.hasOwnProperty.call(window, "localStorage");
+
+const safeParse = (key, fallback) => {
+  if (!canPersist()) return fallback;
+  const raw = localStorage.getItem(key);
+  if (!raw) return fallback;
+  try {
+    return JSON.parse(raw);
+  } catch (error) {
+    console.warn(`Unable to parse ${key}; resetting saved state.`, error);
+    localStorage.removeItem(key);
+    return fallback;
+  }
+};
+
+const persistCart = () => {
+  if (!canPersist()) return;
+  const cartObj = Object.fromEntries(state.cart.entries());
+  try {
+    localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(cartObj));
+  } catch (error) {
+    console.warn("Unable to persist cart state.", error);
+  }
+};
+
+const persistWishlist = () => {
+  if (!canPersist()) return;
+  try {
+    localStorage.setItem(
+      STORAGE_KEYS.wishlist,
+      JSON.stringify(Array.from(state.wishlist))
+    );
+  } catch (error) {
+    console.warn("Unable to persist wishlist state.", error);
+  }
+};
+
+const hydrateState = () => {
+  const savedCart = safeParse(STORAGE_KEYS.cart, {});
+  const savedWishlist = safeParse(STORAGE_KEYS.wishlist, []);
+  let cartChanged = false;
+  let wishlistChanged = false;
+
+  if (savedCart && typeof savedCart === "object") {
+    Object.entries(savedCart).forEach(([id, qty]) => {
+      const productId = Number(id);
+      const quantity = Math.floor(Number(qty));
+      const exists = products.some((item) => item.id === productId);
+      if (!exists || !Number.isFinite(quantity) || quantity <= 0) {
+        cartChanged = true;
+        return;
+      }
+      state.cart.set(productId, quantity);
+    });
+  } else if (savedCart) {
+    cartChanged = true;
+  }
+
+  if (Array.isArray(savedWishlist)) {
+    savedWishlist.forEach((id) => {
+      const productId = Number(id);
+      const exists = products.some((item) => item.id === productId);
+      if (!exists) {
+        wishlistChanged = true;
+        return;
+      }
+      state.wishlist.add(productId);
+    });
+  } else if (savedWishlist) {
+    wishlistChanged = true;
+  }
+
+  if (cartChanged) {
+    persistCart();
+  }
+  if (wishlistChanged) {
+    persistWishlist();
+  }
+};
 
 const getCartTotal = () =>
   Array.from(state.cart.entries()).reduce((total, [id, qty]) => {
     const product = products.find((item) => item.id === id);
+    if (!product) return total;
     return total + product.price * qty;
   }, 0);
 
@@ -346,35 +436,47 @@ const showToast = (message) => {
   }, 2000);
 };
 
-const openCart = () => {
-  elements.cartDrawer.classList.add("open");
-  elements.overlay.classList.add("show");
+const setCartOpen = (isOpen) => {
+  elements.cartDrawer.classList.toggle("open", isOpen);
+  elements.overlay.classList.toggle("show", isOpen);
+  elements.cartDrawer.setAttribute("aria-hidden", String(!isOpen));
+  elements.cartButton.setAttribute("aria-expanded", String(isOpen));
+  document.body.classList.toggle("no-scroll", isOpen);
+  if (isOpen) {
+    elements.closeCart.focus();
+  } else {
+    elements.cartButton.focus();
+  }
 };
 
-const closeCart = () => {
-  elements.cartDrawer.classList.remove("open");
-  elements.overlay.classList.remove("show");
-};
+const openCart = () => setCartOpen(true);
+const closeCart = () => setCartOpen(false);
 
 const setActiveCategory = (category) => {
   state.activeCategory = category;
+  renderCategoryGrid();
   renderCategoryTabs();
   renderProducts();
   document
     .getElementById("productsSection")
-    .scrollIntoView({ behavior: "smooth" });
+    .scrollIntoView({ behavior: getScrollBehavior() });
 };
 
 // Renderers
 const renderCategoryGrid = () => {
   elements.categoryGrid.innerHTML = categoryMeta
     .map(
-      (item) => `
-        <button class="category-card" data-category="${item.label}">
+      (item) => {
+        const isActive = state.activeCategory === item.label;
+        return `
+        <button class="category-card ${isActive ? "active" : ""}" data-category="${
+          item.label
+        }" aria-pressed="${isActive}">
           <span class="emoji">${item.emoji}</span>
           <span>${item.label}</span>
         </button>
-      `
+      `;
+      }
     )
     .join("");
 };
@@ -385,7 +487,12 @@ const renderCategoryTabs = () => {
     .map((label) => {
       const isActive = label === state.activeCategory;
       return `
-        <button class="filter-tab ${isActive ? "active" : ""}" data-category="${label}">
+        <button
+          class="filter-tab ${isActive ? "active" : ""}"
+          data-category="${label}"
+          role="tab"
+          aria-selected="${isActive}"
+        >
           ${label}
         </button>
       `;
@@ -411,9 +518,14 @@ const renderProducts = () => {
   elements.productCount.textContent = `(${filtered.length} products)`;
 
   if (filtered.length === 0) {
+    const emptyMessage = state.searchTerm
+      ? `No products found for "${state.searchTerm}".`
+      : state.activeCategory === "All"
+      ? "No products found right now."
+      : `No products available in ${state.activeCategory} yet.`;
     elements.productGrid.innerHTML = `
       <div class="empty-state">
-        No products found for this filter. Try another category or search term.
+        ${emptyMessage} Try another category or search term.
       </div>
     `;
     return;
@@ -434,9 +546,12 @@ const renderProducts = () => {
                 : ""
             }
           </div>
-          <button class="wishlist-btn ${isWishlisted ? "active" : ""}" data-id="${
-        product.id
-      }" aria-label="Toggle wishlist">
+          <button
+            class="wishlist-btn ${isWishlisted ? "active" : ""}"
+            data-id="${product.id}"
+            aria-label="Toggle wishlist"
+            aria-pressed="${isWishlisted}"
+          >
             ❤
           </button>
           <img src="${getProductImage(product.name)}" alt="${product.name}" />
@@ -449,9 +564,12 @@ const renderProducts = () => {
           <div class="rating">⭐ ${product.rating} · ${
         product.reviews
       } reviews</div>
-          <button class="btn-primary add-to-cart" data-id="${
-        product.id
-      }" type="button">
+          <button
+            class="btn-primary add-to-cart"
+            data-id="${product.id}"
+            type="button"
+            aria-label="Add ${product.name} to cart"
+          >
             Add to Cart
           </button>
         </div>
@@ -480,14 +598,35 @@ const renderCart = () => {
               <h4>${product.name}</h4>
               <p class="weight">${product.weight}</p>
               <div class="qty-controls">
-                <button class="qty-btn" data-action="decrease" data-id="${id}">−</button>
+                <button
+                  class="qty-btn"
+                  data-action="decrease"
+                  data-id="${id}"
+                  aria-label="Decrease ${product.name} quantity"
+                >
+                  −
+                </button>
                 <span>${qty}</span>
-                <button class="qty-btn" data-action="increase" data-id="${id}">+</button>
+                <button
+                  class="qty-btn"
+                  data-action="increase"
+                  data-id="${id}"
+                  aria-label="Increase ${product.name} quantity"
+                >
+                  +
+                </button>
               </div>
             </div>
             <div class="cart-item-meta">
               <div>${formatPrice(product.price * qty)}</div>
-              <button class="remove-btn" data-action="remove" data-id="${id}">×</button>
+              <button
+                class="remove-btn"
+                data-action="remove"
+                data-id="${id}"
+                aria-label="Remove ${product.name}"
+              >
+                ×
+              </button>
             </div>
           </div>
         `;
@@ -507,6 +646,7 @@ const addToCart = (id) => {
   state.cart.set(id, currentQty + 1);
   updateCartBadge();
   renderCart();
+  persistCart();
   showToast("✓ Added to cart!");
 };
 
@@ -520,6 +660,7 @@ const updateCartQty = (id, delta) => {
   }
   updateCartBadge();
   renderCart();
+  persistCart();
 };
 
 const toggleWishlist = (id) => {
@@ -529,6 +670,7 @@ const toggleWishlist = (id) => {
     state.wishlist.add(id);
   }
   renderProducts();
+  persistWishlist();
 };
 
 // Carousel
@@ -542,9 +684,14 @@ const showSlide = (index) => {
 
 const startCarousel = () => {
   clearInterval(carouselTimer);
+  if (motionQuery.matches) return;
   carouselTimer = setInterval(() => {
     showSlide(activeSlideIndex + 1);
   }, 3000);
+};
+
+const stopCarousel = () => {
+  clearInterval(carouselTimer);
 };
 
 const handleScroll = () => {
@@ -554,13 +701,22 @@ const handleScroll = () => {
   elements.backToTop.classList.toggle("show", showBackToTop);
 };
 
+const handleMotionPreference = () => {
+  if (motionQuery.matches) {
+    stopCarousel();
+  } else {
+    startCarousel();
+  }
+};
+
 const init = () => {
+  hydrateState();
   renderCategoryGrid();
   renderCategoryTabs();
   renderProducts();
   renderCart();
   updateCartBadge();
-  startCarousel();
+  handleMotionPreference();
   handleScroll();
 };
 
@@ -601,6 +757,7 @@ elements.cartItems.addEventListener("click", (event) => {
     state.cart.delete(id);
     updateCartBadge();
     renderCart();
+    persistCart();
   }
 });
 
@@ -618,7 +775,7 @@ elements.checkoutButton.addEventListener("click", () => {
 });
 
 elements.backToTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: getScrollBehavior() });
 });
 
 elements.prevSlide.addEventListener("click", () => {
@@ -629,6 +786,23 @@ elements.prevSlide.addEventListener("click", () => {
 elements.nextSlide.addEventListener("click", () => {
   showSlide(activeSlideIndex + 1);
   startCarousel();
+});
+
+elements.carousel.addEventListener("mouseenter", stopCarousel);
+elements.carousel.addEventListener("mouseleave", startCarousel);
+elements.carousel.addEventListener("focusin", stopCarousel);
+elements.carousel.addEventListener("focusout", startCarousel);
+
+if (typeof motionQuery.addEventListener === "function") {
+  motionQuery.addEventListener("change", handleMotionPreference);
+} else if (typeof motionQuery.addListener === "function") {
+  motionQuery.addListener(handleMotionPreference);
+}
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && elements.cartDrawer.classList.contains("open")) {
+    closeCart();
+  }
 });
 
 window.addEventListener("scroll", handleScroll);
