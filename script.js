@@ -1,0 +1,635 @@
+// Product data (mandatory list)
+const products = [
+  {
+    id: 1,
+    name: "Fresh Tomatoes",
+    category: "Vegetables",
+    weight: "1kg",
+    price: 35,
+    originalPrice: 50,
+    discount: 30,
+    rating: 4.4,
+    reviews: "2.1k",
+  },
+  {
+    id: 2,
+    name: "Baby Spinach",
+    category: "Vegetables",
+    weight: "250g",
+    price: 29,
+    originalPrice: 40,
+    discount: 28,
+    rating: 4.2,
+    reviews: "890",
+  },
+  {
+    id: 3,
+    name: "Onions",
+    category: "Vegetables",
+    weight: "2kg",
+    price: 55,
+    originalPrice: 75,
+    discount: 27,
+    rating: 4.5,
+    reviews: "3.4k",
+  },
+  {
+    id: 4,
+    name: "Broccoli",
+    category: "Vegetables",
+    weight: "500g",
+    price: 79,
+    originalPrice: 110,
+    discount: 28,
+    rating: 4.3,
+    reviews: "670",
+  },
+  {
+    id: 5,
+    name: "Amul Full Cream Milk",
+    category: "Dairy",
+    weight: "1L",
+    price: 66,
+    originalPrice: 68,
+    discount: 3,
+    rating: 4.7,
+    reviews: "8.2k",
+  },
+  {
+    id: 6,
+    name: "Britannia Paneer",
+    category: "Dairy",
+    weight: "200g",
+    price: 89,
+    originalPrice: 100,
+    discount: 11,
+    rating: 4.5,
+    reviews: "4.1k",
+  },
+  {
+    id: 7,
+    name: "Nestle Greek Yogurt",
+    category: "Dairy",
+    weight: "400g",
+    price: 115,
+    originalPrice: 140,
+    discount: 18,
+    rating: 4.4,
+    reviews: "1.9k",
+  },
+  {
+    id: 8,
+    name: "Amul Butter",
+    category: "Dairy",
+    weight: "100g",
+    price: 55,
+    originalPrice: 60,
+    discount: 8,
+    rating: 4.6,
+    reviews: "6.7k",
+  },
+  {
+    id: 9,
+    name: "Lay's Classic Salted",
+    category: "Snacks",
+    weight: "78g",
+    price: 20,
+    originalPrice: 20,
+    discount: 0,
+    rating: 4.3,
+    reviews: "12k",
+  },
+  {
+    id: 10,
+    name: "Haldiram's Bhujia",
+    category: "Snacks",
+    weight: "400g",
+    price: 149,
+    originalPrice: 180,
+    discount: 17,
+    rating: 4.6,
+    reviews: "7.3k",
+  },
+  {
+    id: 11,
+    name: "Oreo Biscuits",
+    category: "Snacks",
+    weight: "300g",
+    price: 85,
+    originalPrice: 99,
+    discount: 14,
+    rating: 4.5,
+    reviews: "9.1k",
+  },
+  {
+    id: 12,
+    name: "Too Yumm Multigrain",
+    category: "Snacks",
+    weight: "150g",
+    price: 55,
+    originalPrice: 70,
+    discount: 21,
+    rating: 4.2,
+    reviews: "2.4k",
+  },
+  {
+    id: 13,
+    name: "Tropicana Orange Juice",
+    category: "Beverages",
+    weight: "1L",
+    price: 99,
+    originalPrice: 120,
+    discount: 18,
+    rating: 4.4,
+    reviews: "3.8k",
+  },
+  {
+    id: 14,
+    name: "Red Bull Energy Drink",
+    category: "Beverages",
+    weight: "250ml",
+    price: 115,
+    originalPrice: 125,
+    discount: 8,
+    rating: 4.6,
+    reviews: "5.2k",
+  },
+  {
+    id: 15,
+    name: "Bisleri Water",
+    category: "Beverages",
+    weight: "1L",
+    price: 20,
+    originalPrice: 20,
+    discount: 0,
+    rating: 4.8,
+    reviews: "15k",
+  },
+  {
+    id: 16,
+    name: "Nescafé Classic Coffee",
+    category: "Beverages",
+    weight: "200g",
+    price: 299,
+    originalPrice: 350,
+    discount: 15,
+    rating: 4.7,
+    reviews: "11k",
+  },
+  {
+    id: 17,
+    name: "Dove Soap",
+    category: "Personal Care",
+    weight: "100g",
+    price: 55,
+    originalPrice: 65,
+    discount: 15,
+    rating: 4.6,
+    reviews: "6.3k",
+  },
+  {
+    id: 18,
+    name: "Head & Shoulders",
+    category: "Personal Care",
+    weight: "340ml",
+    price: 299,
+    originalPrice: 350,
+    discount: 15,
+    rating: 4.5,
+    reviews: "4.8k",
+  },
+  {
+    id: 19,
+    name: "Colgate MaxFresh",
+    category: "Personal Care",
+    weight: "150g",
+    price: 89,
+    originalPrice: 105,
+    discount: 15,
+    rating: 4.4,
+    reviews: "7.1k",
+  },
+  {
+    id: 20,
+    name: "Vaseline Body Lotion",
+    category: "Personal Care",
+    weight: "300ml",
+    price: 199,
+    originalPrice: 249,
+    discount: 20,
+    rating: 4.5,
+    reviews: "3.2k",
+  },
+  {
+    id: 21,
+    name: "Fortune Basmati Rice",
+    category: "Staples",
+    weight: "5kg",
+    price: 399,
+    originalPrice: 450,
+    discount: 11,
+    rating: 4.6,
+    reviews: "9.8k",
+  },
+  {
+    id: 22,
+    name: "Tata Salt",
+    category: "Staples",
+    weight: "1kg",
+    price: 24,
+    originalPrice: 28,
+    discount: 14,
+    rating: 4.8,
+    reviews: "22k",
+  },
+  {
+    id: 23,
+    name: "Aashirvaad Atta",
+    category: "Staples",
+    weight: "5kg",
+    price: 249,
+    originalPrice: 285,
+    discount: 13,
+    rating: 4.7,
+    reviews: "18k",
+  },
+  {
+    id: 24,
+    name: "Saffola Gold Oil",
+    category: "Staples",
+    weight: "1L",
+    price: 189,
+    originalPrice: 220,
+    discount: 14,
+    rating: 4.5,
+    reviews: "5.6k",
+  },
+];
+
+// Category metadata for the grid and tabs
+const categoryMeta = [
+  { label: "Vegetables", emoji: "🥦" },
+  { label: "Dairy", emoji: "🥛" },
+  { label: "Meat", emoji: "🍗" },
+  { label: "Personal Care", emoji: "🧴" },
+  { label: "Snacks", emoji: "🍿" },
+  { label: "Beverages", emoji: "🥤" },
+  { label: "Cleaning", emoji: "🧹" },
+  { label: "Staples", emoji: "🍚" },
+  { label: "Cooking Essentials", emoji: "🍳" },
+  { label: "Health", emoji: "💊" },
+];
+
+const DELIVERY_THRESHOLD = 499;
+const DELIVERY_FEE = 40;
+
+// UI state (in-memory for session persistence)
+const state = {
+  activeCategory: "All",
+  searchTerm: "",
+  cart: new Map(),
+  wishlist: new Set(),
+};
+
+const elements = {
+  categoryGrid: document.getElementById("categoryGrid"),
+  categoryTabs: document.getElementById("categoryTabs"),
+  productGrid: document.getElementById("productGrid"),
+  productCount: document.getElementById("productCount"),
+  cartCount: document.getElementById("cartCount"),
+  cartDrawer: document.getElementById("cartDrawer"),
+  cartItems: document.getElementById("cartItems"),
+  cartSubtotal: document.getElementById("cartSubtotal"),
+  cartDelivery: document.getElementById("cartDelivery"),
+  cartButton: document.getElementById("cartButton"),
+  closeCart: document.getElementById("closeCart"),
+  overlay: document.getElementById("overlay"),
+  searchInput: document.getElementById("searchInput"),
+  backToTop: document.getElementById("backToTop"),
+  toast: document.getElementById("toast"),
+  checkoutButton: document.getElementById("checkoutButton"),
+  header: document.getElementById("siteHeader"),
+  prevSlide: document.getElementById("prevSlide"),
+  nextSlide: document.getElementById("nextSlide"),
+  slides: document.querySelectorAll(".slide"),
+};
+
+let toastTimer;
+let carouselTimer;
+let activeSlideIndex = 0;
+
+const formatPrice = (value) => `₹${value}`;
+
+const getProductImage = (name) =>
+  `https://placehold.co/200x200?text=${encodeURIComponent(name)}`;
+
+const getCartTotal = () =>
+  Array.from(state.cart.entries()).reduce((total, [id, qty]) => {
+    const product = products.find((item) => item.id === id);
+    return total + product.price * qty;
+  }, 0);
+
+const updateCartBadge = () => {
+  const totalQty = Array.from(state.cart.values()).reduce(
+    (sum, qty) => sum + qty,
+    0
+  );
+  elements.cartCount.textContent = totalQty;
+};
+
+const showToast = (message) => {
+  elements.toast.textContent = message;
+  elements.toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    elements.toast.classList.remove("show");
+  }, 2000);
+};
+
+const openCart = () => {
+  elements.cartDrawer.classList.add("open");
+  elements.overlay.classList.add("show");
+};
+
+const closeCart = () => {
+  elements.cartDrawer.classList.remove("open");
+  elements.overlay.classList.remove("show");
+};
+
+const setActiveCategory = (category) => {
+  state.activeCategory = category;
+  renderCategoryTabs();
+  renderProducts();
+  document
+    .getElementById("productsSection")
+    .scrollIntoView({ behavior: "smooth" });
+};
+
+// Renderers
+const renderCategoryGrid = () => {
+  elements.categoryGrid.innerHTML = categoryMeta
+    .map(
+      (item) => `
+        <button class="category-card" data-category="${item.label}">
+          <span class="emoji">${item.emoji}</span>
+          <span>${item.label}</span>
+        </button>
+      `
+    )
+    .join("");
+};
+
+const renderCategoryTabs = () => {
+  const tabs = ["All", ...categoryMeta.map((item) => item.label)];
+  elements.categoryTabs.innerHTML = tabs
+    .map((label) => {
+      const isActive = label === state.activeCategory;
+      return `
+        <button class="filter-tab ${isActive ? "active" : ""}" data-category="${label}">
+          ${label}
+        </button>
+      `;
+    })
+    .join("");
+};
+
+const getFilteredProducts = () => {
+  const searchTerm = state.searchTerm.toLowerCase();
+  return products.filter((product) => {
+    const matchesCategory =
+      state.activeCategory === "All" ||
+      product.category === state.activeCategory;
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm) ||
+      product.category.toLowerCase().includes(searchTerm);
+    return matchesCategory && matchesSearch;
+  });
+};
+
+const renderProducts = () => {
+  const filtered = getFilteredProducts();
+  elements.productCount.textContent = `(${filtered.length} products)`;
+
+  if (filtered.length === 0) {
+    elements.productGrid.innerHTML = `
+      <div class="empty-state">
+        No products found for this filter. Try another category or search term.
+      </div>
+    `;
+    return;
+  }
+
+  elements.productGrid.innerHTML = filtered
+    .map((product) => {
+      const deliveryEligible = product.price > 99;
+      const discountClass = product.discount === 0 ? "neutral" : "";
+      const isWishlisted = state.wishlist.has(product.id);
+      return `
+        <div class="product-card">
+          <div class="product-badges">
+            <span class="discount-badge ${discountClass}">${product.discount}% OFF</span>
+            ${
+              deliveryEligible
+                ? '<span class="delivery-badge">FREE Delivery</span>'
+                : ""
+            }
+          </div>
+          <button class="wishlist-btn ${isWishlisted ? "active" : ""}" data-id="${
+        product.id
+      }" aria-label="Toggle wishlist">
+            ❤
+          </button>
+          <img src="${getProductImage(product.name)}" alt="${product.name}" />
+          <h3>${product.name}</h3>
+          <p class="weight">${product.weight}</p>
+          <div class="price-row">
+            <span class="price">${formatPrice(product.price)}</span>
+            <span class="mrp">${formatPrice(product.originalPrice)}</span>
+          </div>
+          <div class="rating">⭐ ${product.rating} · ${
+        product.reviews
+      } reviews</div>
+          <button class="btn-primary add-to-cart" data-id="${
+        product.id
+      }" type="button">
+            Add to Cart
+          </button>
+        </div>
+      `;
+    })
+    .join("");
+};
+
+const renderCart = () => {
+  if (state.cart.size === 0) {
+    elements.cartItems.innerHTML = `
+      <div class="cart-empty">
+        <div class="emoji">🛒</div>
+        <p>Your cart is empty.</p>
+        <p>Add items to see them here.</p>
+      </div>
+    `;
+  } else {
+    elements.cartItems.innerHTML = Array.from(state.cart.entries())
+      .map(([id, qty]) => {
+        const product = products.find((item) => item.id === id);
+        return `
+          <div class="cart-item">
+            <img src="${getProductImage(product.name)}" alt="${product.name}" />
+            <div>
+              <h4>${product.name}</h4>
+              <p class="weight">${product.weight}</p>
+              <div class="qty-controls">
+                <button class="qty-btn" data-action="decrease" data-id="${id}">−</button>
+                <span>${qty}</span>
+                <button class="qty-btn" data-action="increase" data-id="${id}">+</button>
+              </div>
+            </div>
+            <div class="cart-item-meta">
+              <div>${formatPrice(product.price * qty)}</div>
+              <button class="remove-btn" data-action="remove" data-id="${id}">×</button>
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  const subtotal = getCartTotal();
+  const deliveryFee = subtotal === 0 || subtotal >= DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
+  elements.cartSubtotal.textContent = formatPrice(subtotal);
+  elements.cartDelivery.textContent = deliveryFee === 0 ? "FREE" : formatPrice(deliveryFee);
+};
+
+// Cart helpers
+const addToCart = (id) => {
+  const currentQty = state.cart.get(id) || 0;
+  state.cart.set(id, currentQty + 1);
+  updateCartBadge();
+  renderCart();
+  showToast("✓ Added to cart!");
+};
+
+const updateCartQty = (id, delta) => {
+  const currentQty = state.cart.get(id) || 0;
+  const newQty = currentQty + delta;
+  if (newQty <= 0) {
+    state.cart.delete(id);
+  } else {
+    state.cart.set(id, newQty);
+  }
+  updateCartBadge();
+  renderCart();
+};
+
+const toggleWishlist = (id) => {
+  if (state.wishlist.has(id)) {
+    state.wishlist.delete(id);
+  } else {
+    state.wishlist.add(id);
+  }
+  renderProducts();
+};
+
+// Carousel
+const showSlide = (index) => {
+  const slides = Array.from(elements.slides);
+  activeSlideIndex = (index + slides.length) % slides.length;
+  slides.forEach((slide, idx) => {
+    slide.classList.toggle("active", idx === activeSlideIndex);
+  });
+};
+
+const startCarousel = () => {
+  clearInterval(carouselTimer);
+  carouselTimer = setInterval(() => {
+    showSlide(activeSlideIndex + 1);
+  }, 3000);
+};
+
+const handleScroll = () => {
+  const isSticky = window.scrollY > 10;
+  const showBackToTop = window.scrollY > 300;
+  elements.header.classList.toggle("sticky", isSticky);
+  elements.backToTop.classList.toggle("show", showBackToTop);
+};
+
+const init = () => {
+  renderCategoryGrid();
+  renderCategoryTabs();
+  renderProducts();
+  renderCart();
+  updateCartBadge();
+  startCarousel();
+  handleScroll();
+};
+
+// Event wiring
+elements.categoryGrid.addEventListener("click", (event) => {
+  const card = event.target.closest(".category-card");
+  if (!card) return;
+  setActiveCategory(card.dataset.category);
+});
+
+elements.categoryTabs.addEventListener("click", (event) => {
+  const tab = event.target.closest(".filter-tab");
+  if (!tab) return;
+  setActiveCategory(tab.dataset.category);
+});
+
+elements.productGrid.addEventListener("click", (event) => {
+  const addButton = event.target.closest(".add-to-cart");
+  if (addButton) {
+    addToCart(Number(addButton.dataset.id));
+    return;
+  }
+
+  const wishlistButton = event.target.closest(".wishlist-btn");
+  if (wishlistButton) {
+    toggleWishlist(Number(wishlistButton.dataset.id));
+  }
+});
+
+elements.cartItems.addEventListener("click", (event) => {
+  const button = event.target.closest("button");
+  if (!button) return;
+  const id = Number(button.dataset.id);
+  const action = button.dataset.action;
+  if (action === "increase") updateCartQty(id, 1);
+  if (action === "decrease") updateCartQty(id, -1);
+  if (action === "remove") {
+    state.cart.delete(id);
+    updateCartBadge();
+    renderCart();
+  }
+});
+
+elements.cartButton.addEventListener("click", openCart);
+elements.closeCart.addEventListener("click", closeCart);
+elements.overlay.addEventListener("click", closeCart);
+
+elements.searchInput.addEventListener("input", (event) => {
+  state.searchTerm = event.target.value.trim();
+  renderProducts();
+});
+
+elements.checkoutButton.addEventListener("click", () => {
+  alert("Checkout is a demo flow. Thanks for shopping!");
+});
+
+elements.backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+elements.prevSlide.addEventListener("click", () => {
+  showSlide(activeSlideIndex - 1);
+  startCarousel();
+});
+
+elements.nextSlide.addEventListener("click", () => {
+  showSlide(activeSlideIndex + 1);
+  startCarousel();
+});
+
+window.addEventListener("scroll", handleScroll);
+window.addEventListener("load", init);
