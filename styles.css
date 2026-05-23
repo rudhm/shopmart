@@ -705,42 +705,185 @@ a {
 }
 
 .footer {
-  background: #111;
-  color: var(--white);
-  padding: 40px 0 20px;
+  background: linear-gradient(135deg, #0b0f1a, #0f172a);
+  color: #f5f5f5;
+  padding: 60px 0 40px;
 }
 
-.footer-grid {
+.footer-top {
   display: grid;
-  gap: 24px;
+  gap: 32px;
 }
 
-.footer h4 {
-  margin: 0 0 10px;
-}
-
-.footer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 6px;
-}
-
-.footer a {
-  color: #d6d6d6;
+.footer-brand .logo {
+  display: inline-flex;
+  color: inherit;
+  margin-bottom: 8px;
 }
 
 .footer .tagline {
-  margin: 8px 0 0;
-  color: #d6d6d6;
+  margin: 4px 0 0;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.footer-description {
+  margin: 12px 0 18px;
+  color: #cbd5f5;
+  line-height: 1.6;
+}
+
+.newsletter {
+  display: grid;
+  gap: 10px;
+}
+
+.newsletter-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.newsletter-field {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsletter-field input {
+  flex: 1 1 200px;
+  border-radius: 12px;
+  border: 1px solid #2b334d;
+  background: #111827;
+  padding: 10px 12px;
+  color: #f5f5f5;
+}
+
+.newsletter-field input::placeholder {
+  color: #7f8bb3;
+}
+
+.newsletter-help {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #9aa3c7;
+}
+
+.footer-links {
+  display: grid;
+  gap: 16px;
+}
+
+.footer-accordion {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 12px;
+}
+
+.footer-accordion:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.footer-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.footer-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.footer-accordion summary::after {
+  content: "+";
+  font-size: 1.1rem;
+}
+
+.footer-accordion[open] summary::after {
+  content: "−";
+}
+
+.footer-accordion ul {
+  list-style: none;
+  padding: 12px 0 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.footer a {
+  color: #cbd5f5;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: #ffffff;
+}
+
+.footer-connect h4 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.footer-note {
+  margin: 0 0 16px;
+  color: #cbd5f5;
 }
 
 .socials {
   display: flex;
-  gap: 10px;
-  font-size: 1.2rem;
-  margin-bottom: 12px;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5f5;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+}
+
+.social-link svg polygon {
+  fill: currentColor;
+  stroke: none;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.social-link[data-brand="facebook"]:hover {
+  color: #1877f2;
+}
+
+.social-link[data-brand="instagram"]:hover {
+  color: #e1306c;
+}
+
+.social-link[data-brand="x"]:hover {
+  color: #111111;
+  background: #ffffff;
+}
+
+.social-link[data-brand="youtube"]:hover {
+  color: #ff0033;
 }
 
 .app-buttons {
@@ -749,15 +892,123 @@ a {
 }
 
 .footer .btn-outline {
-  border-color: #fff;
-  color: #fff;
+  border-color: #cbd5f5;
+  color: #cbd5f5;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 32px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.payment-icons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.payment-icon {
+  width: 52px;
+  height: 32px;
+  color: #9aa3c7;
+  transition: color 0.2s ease;
+}
+
+.payment-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+.payment-icon text {
+  font-size: 10px;
+  font-weight: 700;
+  fill: currentColor;
+  dominant-baseline: middle;
+}
+
+.payment-icon[data-brand="mastercard"] circle {
+  fill: currentColor;
+  opacity: 0.5;
+  stroke: none;
+}
+
+.payment-icon[data-brand="visa"]:hover {
+  color: #1a1f71;
+}
+
+.payment-icon[data-brand="mastercard"]:hover {
+  color: #ff5f00;
+}
+
+.payment-icon[data-brand="upi"]:hover {
+  color: #2c7bff;
+}
+
+.payment-icon[data-brand="rupay"]:hover {
+  color: #00a1e0;
 }
 
 .copyright {
-  margin: 20px 0 0;
-  text-align: center;
-  color: #bdbdbd;
+  margin: 0;
+  color: #9aa3c7;
   font-size: 0.85rem;
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--white);
+  border-top: 1px solid #eee;
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 16px 8px;
+  z-index: 35;
+}
+
+.bottom-nav-item {
+  border: none;
+  background: transparent;
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  color: var(--muted);
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.bottom-nav-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.bottom-nav-item svg polygon {
+  fill: currentColor;
+  stroke: none;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 70px;
+  }
+
+  .bottom-nav {
+    display: flex;
+  }
 }
 
 .back-to-top {
@@ -897,6 +1148,11 @@ body.theme-dark .carousel-dot {
   background: #333333;
 }
 
+body.theme-dark .bottom-nav {
+  background: #111111;
+  border-color: #2a2a2a;
+}
+
 @media (min-width: 480px) {
   .category-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -926,6 +1182,38 @@ body.theme-dark .carousel-dot {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .footer-top {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr) minmax(0, 1fr);
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 32px;
+  }
+
+  .footer-accordion {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .footer-accordion summary {
+    cursor: default;
+  }
+
+  .footer-accordion summary::after {
+    display: none;
+  }
+
+  .footer-accordion ul {
+    padding-top: 10px;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .quick-view-body {
     grid-template-columns: 1fr 1fr;
     align-items: start;
@@ -943,6 +1231,10 @@ body.theme-dark .carousel-dot {
 
   .product-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer-top {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 2.2fr) minmax(0, 1fr);
   }
 
   .slide-content h1 {
