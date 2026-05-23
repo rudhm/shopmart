@@ -3,7 +3,7 @@ const products = [
   {
     id: 1,
     name: "Classic Vanilla Wafers",
-    imageUrl: "https://loremflickr.com/300/300/vanilla,wafer,cookie",
+    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
     category: "Wafers",
     weight: "200g",
     price: 45,
@@ -15,7 +15,7 @@ const products = [
   {
     id: 2,
     name: "Chocolate Cream Wafers",
-    imageUrl: "https://loremflickr.com/300/300/chocolate,wafer,cookie",
+    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
     category: "Wafers",
     weight: "200g",
     price: 55,
@@ -27,7 +27,7 @@ const products = [
   {
     id: 3,
     name: "Strawberry Wafer Rolls",
-    imageUrl: "https://loremflickr.com/300/300/strawberry,wafer,biscuit",
+    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
     category: "Wafers",
     weight: "150g",
     price: 60,
@@ -39,7 +39,7 @@ const products = [
   {
     id: 4,
     name: "Hazelnut Wafer Bites",
-    imageUrl: "https://loremflickr.com/300/300/hazelnut,wafer,snack",
+    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
     category: "Wafers",
     weight: "180g",
     price: 85,
@@ -51,7 +51,7 @@ const products = [
   {
     id: 5,
     name: "Dark Choco Wafer Sticks",
-    imageUrl: "https://loremflickr.com/300/300/dark,chocolate,cookie",
+    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
     category: "Wafers",
     weight: "120g",
     price: 65,
@@ -63,7 +63,7 @@ const products = [
   {
     id: 6,
     name: "Caramel Wafer Bars",
-    imageUrl: "https://loremflickr.com/300/300/caramel,wafer,bar",
+    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
     category: "Wafers",
     weight: "6 pack",
     price: 70,
@@ -75,7 +75,7 @@ const products = [
   {
     id: 7,
     name: "Coconut Wafer Cookies",
-    imageUrl: "https://loremflickr.com/300/300/coconut,wafer,cookie",
+    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
     category: "Wafers",
     weight: "160g",
     price: 58,
@@ -87,7 +87,7 @@ const products = [
   {
     id: 8,
     name: "Almond Crunch Wafers",
-    imageUrl: "https://loremflickr.com/300/300/almond,wafer,cookie",
+    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
     category: "Wafers",
     weight: "180g",
     price: 92,
@@ -99,7 +99,6 @@ const products = [
   {
     id: 9,
     name: "Lay's Classic Salted",
-    imageUrl: "https://loremflickr.com/300/300/potato,chip",
     category: "Snacks",
     weight: "78g",
     price: 20,
@@ -111,7 +110,6 @@ const products = [
   {
     id: 10,
     name: "Haldiram's Bhujia",
-    imageUrl: "https://loremflickr.com/300/300/bhujia,snack",
     category: "Snacks",
     weight: "400g",
     price: 149,
@@ -123,7 +121,7 @@ const products = [
   {
     id: 11,
     name: "Oreo Biscuits",
-    imageUrl: "https://loremflickr.com/300/300/cookie,biscuit",
+    imageUrl: "https://images.openfoodfacts.org/images/products/762/220/175/6697/front_en.3.400.jpg",
     category: "Snacks",
     weight: "300g",
     price: 85,
@@ -135,7 +133,6 @@ const products = [
   {
     id: 12,
     name: "Too Yumm Multigrain",
-    imageUrl: "https://loremflickr.com/300/300/multigrain,chip",
     category: "Snacks",
     weight: "150g",
     price: 55,
@@ -147,7 +144,6 @@ const products = [
   {
     id: 13,
     name: "Tropicana Orange Juice",
-    imageUrl: "https://loremflickr.com/300/300/orange,juice",
     category: "Beverages",
     weight: "1L",
     price: 99,
@@ -159,7 +155,7 @@ const products = [
   {
     id: 14,
     name: "Red Bull Energy Drink",
-    imageUrl: "https://loremflickr.com/300/300/energy,drink",
+    imageUrl: "https://images.openfoodfacts.org/images/products/900/249/010/0759/front_en.18.400.jpg",
     category: "Beverages",
     weight: "250ml",
     price: 115,
@@ -171,7 +167,6 @@ const products = [
   {
     id: 15,
     name: "Bisleri Water",
-    imageUrl: "https://loremflickr.com/300/300/bottled,water",
     category: "Beverages",
     weight: "1L",
     price: 20,
@@ -183,7 +178,6 @@ const products = [
   {
     id: 16,
     name: "Nescafé Classic Coffee",
-    imageUrl: "https://loremflickr.com/300/300/coffee,instant",
     category: "Beverages",
     weight: "200g",
     price: 299,
@@ -195,7 +189,7 @@ const products = [
   {
     id: 17,
     name: "Dove Soap",
-    imageUrl: "https://loremflickr.com/300/300/soap,bar",
+    imageUrl: "https://placehold.co/300x300/f0f4ff/555?text=Dove+Soap",
     category: "Beauty & Cosmetics",
     weight: "100g",
     price: 55,
@@ -207,7 +201,7 @@ const products = [
   {
     id: 18,
     name: "Head & Shoulders",
-    imageUrl: "https://loremflickr.com/300/300/shampoo,bottle",
+    imageUrl: "https://placehold.co/300x300/e8f0fe/555?text=Head+%26+Shoulders",
     category: "Beauty & Cosmetics",
     weight: "340ml",
     price: 299,
@@ -219,7 +213,7 @@ const products = [
   {
     id: 19,
     name: "Colgate MaxFresh",
-    imageUrl: "https://loremflickr.com/300/300/toothpaste,tube",
+    imageUrl: "https://placehold.co/300x300/e8fff4/555?text=Colgate+MaxFresh",
     category: "Beauty & Cosmetics",
     weight: "150g",
     price: 89,
@@ -231,7 +225,7 @@ const products = [
   {
     id: 20,
     name: "Vaseline Body Lotion",
-    imageUrl: "https://loremflickr.com/300/300/body,lotion",
+    imageUrl: "https://placehold.co/300x300/fff8e8/555?text=Vaseline+Lotion",
     category: "Beauty & Cosmetics",
     weight: "300ml",
     price: 199,
@@ -255,7 +249,6 @@ const products = [
   {
     id: 22,
     name: "Tata Salt",
-    imageUrl: "https://loremflickr.com/300/300/salt,pack",
     category: "Staples",
     weight: "1kg",
     price: 24,
@@ -291,7 +284,6 @@ const products = [
   {
     id: 25,
     name: "Cadbury Silk",
-    imageUrl: "https://loremflickr.com/300/300/chocolate,bar",
     category: "Chocolates",
     weight: "110g",
     price: 80,
@@ -303,7 +295,6 @@ const products = [
   {
     id: 26,
     name: "KitKat Classic",
-    imageUrl: "https://loremflickr.com/300/300/chocolate,wafer",
     category: "Chocolates",
     weight: "45g",
     price: 25,
@@ -315,7 +306,6 @@ const products = [
   {
     id: 27,
     name: "Ferrero Rocher",
-    imageUrl: "https://loremflickr.com/300/300/chocolate,truffle",
     category: "Chocolates",
     weight: "200g",
     price: 450,
@@ -327,7 +317,7 @@ const products = [
   {
     id: 28,
     name: "MDH Garam Masala",
-    imageUrl: "https://loremflickr.com/300/300/garam,masala",
+    imageUrl: "https://images.openfoodfacts.org/images/products/629/110/375/0167/front_en.5.400.jpg",
     category: "Spices",
     weight: "100g",
     price: 65,
@@ -339,7 +329,7 @@ const products = [
   {
     id: 29,
     name: "Everest Chilli Powder",
-    imageUrl: "https://loremflickr.com/300/300/chili,powder",
+    imageUrl: "https://images.openfoodfacts.org/images/products/890/178/639/0151/front_en.4.400.jpg",
     category: "Spices",
     weight: "100g",
     price: 58,
@@ -351,7 +341,6 @@ const products = [
   {
     id: 30,
     name: "Tata Sampann Turmeric",
-    imageUrl: "https://loremflickr.com/300/300/turmeric,spice",
     category: "Spices",
     weight: "200g",
     price: 72,
@@ -363,7 +352,7 @@ const products = [
   {
     id: 31,
     name: "Surf Excel Detergent",
-    imageUrl: "https://loremflickr.com/300/300/detergent,powder",
+    imageUrl: "https://placehold.co/300x300/e8f4ff/555?text=Surf+Excel",
     category: "Household Essentials",
     weight: "2kg",
     price: 299,
@@ -375,7 +364,7 @@ const products = [
   {
     id: 32,
     name: "Vim Dishwash Gel",
-    imageUrl: "https://loremflickr.com/300/300/dishwash,liquid",
+    imageUrl: "https://placehold.co/300x300/f0ffe8/555?text=Vim+Dishwash",
     category: "Household Essentials",
     weight: "500ml",
     price: 109,
@@ -387,7 +376,7 @@ const products = [
   {
     id: 33,
     name: "Harpic Toilet Cleaner",
-    imageUrl: "https://loremflickr.com/300/300/toilet,cleaner",
+    imageUrl: "https://placehold.co/300x300/fff0f0/555?text=Harpic",
     category: "Household Essentials",
     weight: "1L",
     price: 189,
@@ -399,7 +388,7 @@ const products = [
   {
     id: 34,
     name: "LEGO Classic Bricks",
-    imageUrl: "https://loremflickr.com/300/300/lego,bricks",
+    imageUrl: "https://placehold.co/300x300/fff3cd/555?text=LEGO+Bricks",
     category: "Kids Toys",
     weight: "1 set",
     price: 799,
@@ -411,7 +400,7 @@ const products = [
   {
     id: 35,
     name: "Hot Wheels Racer Car",
-    imageUrl: "https://loremflickr.com/300/300/toy,car",
+    imageUrl: "https://placehold.co/300x300/ffe8e8/555?text=Hot+Wheels",
     category: "Kids Toys",
     weight: "1 pc",
     price: 149,
@@ -423,7 +412,7 @@ const products = [
   {
     id: 36,
     name: "Barbie Fashion Doll",
-    imageUrl: "https://loremflickr.com/300/300/fashion,doll",
+    imageUrl: "https://placehold.co/300x300/ffe8f8/555?text=Barbie+Doll",
     category: "Kids Toys",
     weight: "1 pc",
     price: 999,
@@ -497,6 +486,45 @@ let activeSlideIndex = 0;
 const formatPrice = (value) => `₹${value}`;
 
 const getScrollBehavior = () => (motionQuery.matches ? "auto" : "smooth");
+
+const PRODUCT_IMAGE_PLACEHOLDER = "https://placehold.co/300x300?text=Loading";
+
+const updateProductImage = (product) => {
+  if (!product.imageUrl) return;
+  const images = document.querySelectorAll(`img[data-product-id="${product.id}"]`);
+  images.forEach((img) => {
+    img.src = product.imageUrl;
+  });
+};
+
+const loadProductImage = async (product) => {
+  if (product.imageUrl) return;
+  const searchUrl = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(
+    product.name
+  )}&search_simple=1&action=process&json=1&page_size=1&fields=image_url`;
+  try {
+    const res = await fetch(searchUrl);
+    if (!res.ok) {
+      console.warn(`Unable to fetch image for ${product.name}.`, res.status);
+      return;
+    }
+    const data = await res.json();
+    if (data.products?.[0]?.image_url) {
+      product.imageUrl = data.products[0].image_url;
+      updateProductImage(product);
+    }
+  } catch (error) {
+    console.warn(`Unable to fetch image for ${product.name}.`, error);
+  }
+};
+
+const loadMissingProductImages = () => {
+  products.forEach((product) => {
+    if (!product.imageUrl) {
+      void loadProductImage(product);
+    }
+  });
+};
 
 const canPersist = () =>
   typeof window !== "undefined" && Object.prototype.hasOwnProperty.call(window, "localStorage");
@@ -703,6 +731,7 @@ const renderProducts = () => {
       const deliveryEligible = product.price > 99;
       const discountClass = product.discount === 0 ? "neutral" : "";
       const isWishlisted = state.wishlist.has(product.id);
+      const productImage = product.imageUrl || PRODUCT_IMAGE_PLACEHOLDER;
       return `
         <div class="product-card">
           <div class="product-badges">
@@ -721,7 +750,12 @@ const renderProducts = () => {
           >
             ❤
           </button>
-          <img src="${product.imageUrl}" alt="${product.name}" />
+          <img
+            src="${productImage}"
+            alt="${product.name}"
+            data-product-id="${product.id}"
+            loading="lazy"
+          />
           <h3>${product.name}</h3>
           <p class="weight">${product.weight}</p>
           <div class="price-row">
@@ -758,9 +792,15 @@ const renderCart = () => {
     elements.cartItems.innerHTML = Array.from(state.cart.entries())
       .map(([id, qty]) => {
         const product = products.find((item) => item.id === id);
+        const productImage = product.imageUrl || PRODUCT_IMAGE_PLACEHOLDER;
         return `
           <div class="cart-item">
-            <img src="${product.imageUrl}" alt="${product.name}" />
+            <img
+              src="${productImage}"
+              alt="${product.name}"
+              data-product-id="${product.id}"
+              loading="lazy"
+            />
             <div>
               <h4>${product.name}</h4>
               <p class="weight">${product.weight}</p>
@@ -881,6 +921,7 @@ const init = () => {
   renderCategoryGrid();
   renderCategoryTabs();
   renderProducts();
+  loadMissingProductImages();
   renderCart();
   updateCartBadge();
   handleMotionPreference();
