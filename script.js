@@ -1347,13 +1347,6 @@ elements.checkoutButton.addEventListener("click", () => {
   alert("Checkout is a demo flow. Thanks for shopping!");
 });
 
-document.getElementById("newsletterForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = e.target.querySelector("input").value;
-  showToast(`✓ Subscribed ${email} to our newsletter!`);
-  e.target.reset();
-});
-
 elements.backToTop.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: getScrollBehavior() });
 });
