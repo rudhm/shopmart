@@ -109,6 +109,33 @@ a {
   padding: 10px 12px;
   border-radius: 10px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.icon-btn:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+.icon-btn .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn .icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text);
+  stroke-width: 2;
+  transition: stroke 0.2s;
+}
+
+.icon-btn:hover .icon svg {
+  stroke: var(--primary);
 }
 
 .icon-btn .badge {
