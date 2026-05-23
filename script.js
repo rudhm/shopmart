@@ -406,6 +406,7 @@ const DELIVERY_FEE = 40;
 const STORAGE_KEYS = {
   cart: "shopmart_cart",
   wishlist: "shopmart_wishlist",
+  theme: "shopmart_theme",
 };
 const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -415,6 +416,7 @@ const state = {
   searchTerm: "",
   cart: new Map(),
   wishlist: new Set(),
+  theme: "light",
 };
 
 const elements = {
@@ -423,11 +425,17 @@ const elements = {
   productGrid: document.getElementById("productGrid"),
   productCount: document.getElementById("productCount"),
   cartCount: document.getElementById("cartCount"),
+  wishlistCount: document.getElementById("wishlistCount"),
   cartDrawer: document.getElementById("cartDrawer"),
   cartItems: document.getElementById("cartItems"),
   cartSubtotal: document.getElementById("cartSubtotal"),
   cartDelivery: document.getElementById("cartDelivery"),
   cartButton: document.getElementById("cartButton"),
+  wishlistButton: document.getElementById("wishlistButton"),
+  wishlistDrawer: document.getElementById("wishlistDrawer"),
+  wishlistItems: document.getElementById("wishlistItems"),
+  closeWishlist: document.getElementById("closeWishlist"),
+  loginButton: document.getElementById("loginButton"),
   closeCart: document.getElementById("closeCart"),
   overlay: document.getElementById("overlay"),
   searchInput: document.getElementById("searchInput"),
@@ -436,24 +444,52 @@ const elements = {
   checkoutButton: document.getElementById("checkoutButton"),
   header: document.getElementById("siteHeader"),
   carousel: document.getElementById("heroCarousel"),
+  carouselDots: document.getElementById("carouselDots"),
   prevSlide: document.getElementById("prevSlide"),
   nextSlide: document.getElementById("nextSlide"),
   slides: document.querySelectorAll(".slide"),
+  accountModal: document.getElementById("accountModal"),
+  closeAccountModal: document.getElementById("closeAccountModal"),
+  accountSubmit: document.getElementById("accountSubmit"),
+  quickViewModal: document.getElementById("quickViewModal"),
+  closeQuickView: document.getElementById("closeQuickView"),
+  quickViewImage: document.getElementById("quickViewImage"),
+  quickViewTitle: document.getElementById("quickViewTitle"),
+  quickViewWeight: document.getElementById("quickViewWeight"),
+  quickViewPrice: document.getElementById("quickViewPrice"),
+  quickViewMrp: document.getElementById("quickViewMrp"),
+  quickViewRating: document.getElementById("quickViewRating"),
+  quickViewQty: document.getElementById("quickViewQty"),
+  quickViewAdd: document.getElementById("quickViewAdd"),
+  themeToggle: document.getElementById("themeToggle"),
 };
 
 let toastTimer;
 let carouselTimer;
 let activeSlideIndex = 0;
+let activeDialog = null;
+let activeDialogTrigger = null;
+let releaseFocusTrap = null;
 
 const formatPrice = (value) => `₹${value}`;
 
 const getScrollBehavior = () => (motionQuery.matches ? "auto" : "smooth");
 
 const getProductImage = (name) =>
-  `https://placehold.co/300x300?text=${encodeURIComponent(name)}`;
+  `https://placehold.co/300x300/f5f5f5/555?text=${encodeURIComponent(name)}`;
 
 const canPersist = () =>
   typeof window !== "undefined" && Object.prototype.hasOwnProperty.call(window, "localStorage");
+
+const safeGetItem = (key) => {
+  if (!canPersist()) return null;
+  try {
+    return localStorage.getItem(key);
+  } catch (error) {
+    console.warn(`Unable to read ${key} from storage.`, error);
+    return null;
+  }
+};
 
 const safeParse = (key, fallback) => {
   if (!canPersist()) return fallback;
@@ -466,6 +502,48 @@ const safeParse = (key, fallback) => {
     localStorage.removeItem(key);
     return fallback;
   }
+};
+
+const debounce = (callback, delay = 200) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => callback(...args), delay);
+  };
+};
+
+const trapFocus = (container) => {
+  const handleKeydown = (event) => {
+    if (event.key !== "Tab") return;
+    const focusables = Array.from(
+      container.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    );
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
+  container.addEventListener("keydown", handleKeydown);
+  const focusTarget =
+    container.querySelector("[data-autofocus]") ||
+    container.querySelector(
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ) ||
+    container;
+  focusTarget.focus();
+
+  return () => {
+    container.removeEventListener("keydown", handleKeydown);
+  };
 };
 
 const persistCart = () => {
@@ -487,6 +565,36 @@ const persistWishlist = () => {
     );
   } catch (error) {
     console.warn("Unable to persist wishlist state.", error);
+  }
+};
+
+const setTheme = (theme) => {
+  state.theme = theme === "dark" ? "dark" : "light";
+  document.body.classList.toggle("theme-dark", state.theme === "dark");
+  if (canPersist()) {
+    try {
+      localStorage.setItem(STORAGE_KEYS.theme, state.theme);
+    } catch (error) {
+      console.warn("Unable to persist theme preference.", error);
+    }
+  }
+  if (elements.themeToggle) {
+    elements.themeToggle.setAttribute("aria-pressed", String(state.theme === "dark"));
+    const icon = elements.themeToggle.querySelector(".icon");
+    if (icon) {
+      icon.textContent = state.theme === "dark" ? "☀️" : "🌙";
+    }
+  }
+};
+
+const hydrateTheme = () => {
+  const savedTheme = safeGetItem(STORAGE_KEYS.theme);
+  if (savedTheme === "dark" || savedTheme === "light") {
+    setTheme(savedTheme);
+    return;
+  }
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    setTheme("dark");
   }
 };
 
@@ -548,6 +656,11 @@ const updateCartBadge = () => {
   elements.cartCount.textContent = totalQty;
 };
 
+const updateWishlistBadge = () => {
+  if (!elements.wishlistCount) return;
+  elements.wishlistCount.textContent = state.wishlist.size;
+};
+
 const showToast = (message) => {
   elements.toast.textContent = message;
   elements.toast.classList.add("show");
@@ -557,21 +670,74 @@ const showToast = (message) => {
   }, 2000);
 };
 
-const setCartOpen = (isOpen) => {
-  elements.cartDrawer.classList.toggle("open", isOpen);
-  elements.overlay.classList.toggle("show", isOpen);
-  elements.cartDrawer.setAttribute("aria-hidden", String(!isOpen));
-  elements.cartButton.setAttribute("aria-expanded", String(isOpen));
-  document.body.classList.toggle("no-scroll", isOpen);
-  if (isOpen) {
-    elements.closeCart.focus();
-  } else {
-    elements.cartButton.focus();
+const openDialog = (dialog, trigger) => {
+  if (!dialog) return;
+  if (activeDialog && activeDialog !== dialog) {
+    closeActiveDialog();
+  }
+  activeDialog = dialog;
+  activeDialogTrigger = trigger || null;
+  dialog.classList.add("open");
+  dialog.setAttribute("aria-hidden", "false");
+  elements.overlay.classList.add("show");
+  elements.overlay.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+  if (releaseFocusTrap) releaseFocusTrap();
+  releaseFocusTrap = trapFocus(dialog);
+};
+
+const closeDialog = (dialog = activeDialog) => {
+  if (!dialog) return;
+  dialog.classList.remove("open");
+  dialog.setAttribute("aria-hidden", "true");
+  elements.overlay.classList.remove("show");
+  elements.overlay.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("no-scroll");
+  if (releaseFocusTrap) {
+    releaseFocusTrap();
+    releaseFocusTrap = null;
+  }
+  if (activeDialogTrigger) {
+    activeDialogTrigger.focus();
+  }
+  if (activeDialog === dialog) {
+    activeDialog = null;
+    activeDialogTrigger = null;
   }
 };
 
-const openCart = () => setCartOpen(true);
-const closeCart = () => setCartOpen(false);
+const openCart = () => {
+  elements.cartButton.setAttribute("aria-expanded", "true");
+  openDialog(elements.cartDrawer, elements.cartButton);
+};
+
+const closeCart = () => {
+  elements.cartButton.setAttribute("aria-expanded", "false");
+  closeDialog(elements.cartDrawer);
+};
+
+const openWishlist = () => {
+  elements.wishlistButton.setAttribute("aria-expanded", "true");
+  openDialog(elements.wishlistDrawer, elements.wishlistButton);
+};
+
+const closeWishlist = () => {
+  elements.wishlistButton.setAttribute("aria-expanded", "false");
+  closeDialog(elements.wishlistDrawer);
+};
+
+const closeActiveDialog = () => {
+  if (!activeDialog) return;
+  if (activeDialog === elements.cartDrawer) {
+    closeCart();
+    return;
+  }
+  if (activeDialog === elements.wishlistDrawer) {
+    closeWishlist();
+    return;
+  }
+  closeDialog(activeDialog);
+};
 
 const setActiveCategory = (category) => {
   state.activeCategory = category;
@@ -658,6 +824,9 @@ const renderProducts = () => {
       const discountClass = product.discount === 0 ? "neutral" : "";
       const isWishlisted = state.wishlist.has(product.id);
       const productImage = product.imageUrl || getProductImage(product.name);
+      const wishlistLabel = isWishlisted
+        ? `Remove ${product.name} from wishlist`
+        : `Add ${product.name} to wishlist`;
       return `
         <div class="product-card">
           <div class="product-badges">
@@ -671,13 +840,27 @@ const renderProducts = () => {
           <button
             class="wishlist-btn ${isWishlisted ? "active" : ""}"
             data-id="${product.id}"
-            aria-label="Toggle wishlist"
+            aria-label="${wishlistLabel}"
             aria-pressed="${isWishlisted}"
           >
             ❤
           </button>
-          <img src="${productImage}" alt="${product.name}" loading="lazy" />
-          <h3>${product.name}</h3>
+          <button
+            class="quick-view-trigger"
+            data-id="${product.id}"
+            type="button"
+            aria-label="Open quick view for ${product.name}"
+          >
+            <img src="${productImage}" alt="${product.name}" loading="lazy" />
+          </button>
+          <button
+            class="quick-view-trigger"
+            data-id="${product.id}"
+            type="button"
+            aria-label="Open quick view for ${product.name}"
+          >
+            <h3>${product.name}</h3>
+          </button>
           <p class="weight">${product.weight}</p>
           <div class="price-row">
             <span class="price">${formatPrice(product.price)}</span>
@@ -686,14 +869,44 @@ const renderProducts = () => {
           <div class="rating">⭐ ${product.rating} · ${
         product.reviews
       } reviews</div>
-          <button
-            class="btn-primary add-to-cart"
-            data-id="${product.id}"
-            type="button"
-            aria-label="Add ${product.name} to cart"
-          >
-            Add to Cart
-          </button>
+          <div class="product-actions">
+            <div class="qty-stepper" data-id="${product.id}">
+              <button
+                class="qty-btn"
+                data-action="decrease"
+                data-id="${product.id}"
+                type="button"
+                aria-label="Decrease ${product.name} quantity"
+              >
+                −
+              </button>
+              <input
+                class="qty-input"
+                data-id="${product.id}"
+                type="number"
+                min="1"
+                value="1"
+                aria-label="${product.name} quantity"
+              />
+              <button
+                class="qty-btn"
+                data-action="increase"
+                data-id="${product.id}"
+                type="button"
+                aria-label="Increase ${product.name} quantity"
+              >
+                +
+              </button>
+            </div>
+            <button
+              class="btn-primary add-to-cart"
+              data-id="${product.id}"
+              type="button"
+              aria-label="Add ${product.name} to cart"
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       `;
     })
@@ -710,11 +923,26 @@ const renderCart = () => {
       </div>
     `;
   } else {
-    elements.cartItems.innerHTML = Array.from(state.cart.entries())
+    const cartItems = Array.from(state.cart.entries())
       .map(([id, qty]) => {
         const product = products.find((item) => item.id === id);
-        const productImage = product.imageUrl || getProductImage(product.name);
-        return `
+        if (!product) return null;
+        return { product, qty };
+      })
+      .filter(Boolean);
+    if (cartItems.length === 0) {
+      elements.cartItems.innerHTML = `
+        <div class="cart-empty">
+          <div class="emoji">🛒</div>
+          <p>Your cart is empty.</p>
+          <p>Add items to see them here.</p>
+        </div>
+      `;
+    } else {
+      elements.cartItems.innerHTML = cartItems
+        .map(({ product, qty }) => {
+          const productImage = product.imageUrl || getProductImage(product.name);
+          return `
           <div class="cart-item">
             <img src="${productImage}" alt="${product.name}" loading="lazy" />
             <div>
@@ -753,8 +981,9 @@ const renderCart = () => {
             </div>
           </div>
         `;
-      })
-      .join("");
+        })
+        .join("");
+    }
   }
 
   const subtotal = getCartTotal();
@@ -763,13 +992,91 @@ const renderCart = () => {
   elements.cartDelivery.textContent = deliveryFee === 0 ? "FREE" : formatPrice(deliveryFee);
 };
 
-// Cart helpers
-const addToCart = (id, quantity) => {
-  const sanitizedQty = Number.isFinite(quantity) ? Math.floor(quantity) : 0;
-  if (sanitizedQty <= 0) {
-    showToast("Enter a valid quantity.");
+const renderWishlist = () => {
+  if (state.wishlist.size === 0) {
+    elements.wishlistItems.innerHTML = `
+      <div class="cart-empty">
+        <div class="emoji">💛</div>
+        <p>Your wishlist is empty.</p>
+        <p>Tap the heart icon to save items.</p>
+      </div>
+    `;
+    updateWishlistBadge();
     return;
   }
+
+  const wishlistProducts = Array.from(state.wishlist.values())
+    .map((id) => products.find((item) => item.id === id))
+    .filter(Boolean);
+
+  if (wishlistProducts.length === 0) {
+    elements.wishlistItems.innerHTML = `
+      <div class="cart-empty">
+        <div class="emoji">💛</div>
+        <p>Your wishlist is empty.</p>
+        <p>Tap the heart icon to save items.</p>
+      </div>
+    `;
+    updateWishlistBadge();
+    return;
+  }
+
+  elements.wishlistItems.innerHTML = wishlistProducts
+    .map((product) => {
+      const id = product.id;
+      const productImage = product.imageUrl || getProductImage(product.name);
+      return `
+        <div class="cart-item">
+          <img src="${productImage}" alt="${product.name}" loading="lazy" />
+          <div>
+            <h4>${product.name}</h4>
+            <p class="weight">${product.weight}</p>
+            <div class="wishlist-actions">
+              <button
+                class="btn-outline"
+                data-action="add-to-cart"
+                data-id="${id}"
+                type="button"
+                aria-label="Add ${product.name} to cart"
+              >
+                Add to Cart
+              </button>
+              <button
+                class="remove-btn"
+                data-action="remove-wishlist"
+                data-id="${id}"
+                type="button"
+                aria-label="Remove ${product.name} from wishlist"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+          <div class="cart-item-meta">
+            <div>${formatPrice(product.price)}</div>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+  updateWishlistBadge();
+};
+
+// Cart helpers
+const parseQuantity = (value, fallback = 1) => {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+};
+
+const normalizeQuantityInput = (input) => {
+  if (!input) return;
+  const nextValue = parseQuantity(input.value, 1);
+  input.value = String(nextValue);
+};
+
+const addToCart = (id, quantity) => {
+  const sanitizedQty = parseQuantity(quantity, 0);
+  if (sanitizedQty <= 0) return;
   const currentQty = state.cart.get(id) || 0;
   state.cart.set(id, currentQty + sanitizedQty);
   updateCartBadge();
@@ -798,7 +1105,23 @@ const toggleWishlist = (id) => {
     state.wishlist.add(id);
   }
   renderProducts();
+  renderWishlist();
   persistWishlist();
+};
+
+const openQuickView = (productId, trigger) => {
+  const product = products.find((item) => item.id === productId);
+  if (!product) return;
+  elements.quickViewTitle.textContent = product.name;
+  elements.quickViewImage.src = product.imageUrl || getProductImage(product.name);
+  elements.quickViewImage.alt = product.name;
+  elements.quickViewWeight.textContent = product.weight;
+  elements.quickViewPrice.textContent = formatPrice(product.price);
+  elements.quickViewMrp.textContent = formatPrice(product.originalPrice);
+  elements.quickViewRating.textContent = `⭐ ${product.rating} · ${product.reviews} reviews`;
+  elements.quickViewQty.value = "1";
+  elements.quickViewAdd.dataset.id = String(product.id);
+  openDialog(elements.quickViewModal, trigger);
 };
 
 // Carousel
@@ -808,6 +1131,32 @@ const showSlide = (index) => {
   slides.forEach((slide, idx) => {
     slide.classList.toggle("active", idx === activeSlideIndex);
   });
+  if (elements.carouselDots) {
+    const dots = elements.carouselDots.querySelectorAll(".carousel-dot");
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === activeSlideIndex);
+      dot.setAttribute("aria-selected", String(idx === activeSlideIndex));
+    });
+  }
+};
+
+const renderCarouselDots = () => {
+  if (!elements.carouselDots) return;
+  elements.carouselDots.innerHTML = Array.from(elements.slides)
+    .map((_, idx) => {
+      const isActive = idx === activeSlideIndex;
+      return `
+        <button
+          class="carousel-dot ${isActive ? "active" : ""}"
+          type="button"
+          role="tab"
+          aria-selected="${isActive}"
+          aria-label="Go to slide ${idx + 1}"
+          data-slide="${idx}"
+        ></button>
+      `;
+    })
+    .join("");
 };
 
 const startCarousel = () => {
@@ -838,12 +1187,22 @@ const handleMotionPreference = () => {
 };
 
 const init = () => {
+  const initialSlide = Array.from(elements.slides).findIndex((slide) =>
+    slide.classList.contains("active")
+  );
+  if (initialSlide >= 0) {
+    activeSlideIndex = initialSlide;
+  }
   hydrateState();
+  hydrateTheme();
   renderCategoryGrid();
   renderCategoryTabs();
   renderProducts();
   renderCart();
+  renderWishlist();
   updateCartBadge();
+  updateWishlistBadge();
+  renderCarouselDots();
   handleMotionPreference();
   handleScroll();
 };
@@ -862,23 +1221,30 @@ elements.categoryTabs.addEventListener("click", (event) => {
 });
 
 elements.productGrid.addEventListener("click", (event) => {
+  const qtyButton = event.target.closest(".qty-stepper .qty-btn");
+  if (qtyButton) {
+    const stepper = qtyButton.closest(".qty-stepper");
+    const input = stepper ? stepper.querySelector(".qty-input") : null;
+    if (!input) return;
+    const delta = qtyButton.dataset.action === "increase" ? 1 : -1;
+    const nextValue = Math.max(1, parseQuantity(input.value, 1) + delta);
+    input.value = String(nextValue);
+    return;
+  }
+
+  const quickViewTrigger = event.target.closest(".quick-view-trigger");
+  if (quickViewTrigger) {
+    openQuickView(Number(quickViewTrigger.dataset.id), quickViewTrigger);
+    return;
+  }
+
   const addButton = event.target.closest(".add-to-cart");
   if (addButton) {
     const productId = Number(addButton.dataset.id);
-    const product = products.find((item) => item.id === productId);
-    const input = window.prompt(
-      `Enter quantity for ${product ? product.name : "this item"}:`,
-      "1"
-    );
-    if (input === null) {
-      showToast("Add to cart canceled.");
-      return;
-    }
-    const quantity = Number.parseInt(input, 10);
-    if (!Number.isFinite(quantity) || quantity <= 0) {
-      showToast("Enter a valid quantity.");
-      return;
-    }
+    const card = addButton.closest(".product-card");
+    const input = card ? card.querySelector(".qty-input") : null;
+    const quantity = parseQuantity(input ? input.value : 1, 1);
+    if (input) input.value = String(quantity);
     addToCart(productId, quantity);
     return;
   }
@@ -886,6 +1252,13 @@ elements.productGrid.addEventListener("click", (event) => {
   const wishlistButton = event.target.closest(".wishlist-btn");
   if (wishlistButton) {
     toggleWishlist(Number(wishlistButton.dataset.id));
+  }
+});
+
+elements.productGrid.addEventListener("change", (event) => {
+  const input = event.target.closest(".qty-input");
+  if (input) {
+    normalizeQuantityInput(input);
   }
 });
 
@@ -904,13 +1277,70 @@ elements.cartItems.addEventListener("click", (event) => {
   }
 });
 
+elements.wishlistItems.addEventListener("click", (event) => {
+  const button = event.target.closest("button");
+  if (!button) return;
+  const id = Number(button.dataset.id);
+  const action = button.dataset.action;
+  if (action === "add-to-cart") {
+    addToCart(id, 1);
+    return;
+  }
+  if (action === "remove-wishlist") {
+    state.wishlist.delete(id);
+    renderProducts();
+    renderWishlist();
+    persistWishlist();
+  }
+});
+
 elements.cartButton.addEventListener("click", openCart);
 elements.closeCart.addEventListener("click", closeCart);
-elements.overlay.addEventListener("click", closeCart);
+elements.wishlistButton.addEventListener("click", openWishlist);
+elements.closeWishlist.addEventListener("click", closeWishlist);
+elements.overlay.addEventListener("click", closeActiveDialog);
+
+elements.loginButton.addEventListener("click", () => {
+  openDialog(elements.accountModal, elements.loginButton);
+});
+elements.closeAccountModal.addEventListener("click", () => closeDialog(elements.accountModal));
+elements.accountSubmit.addEventListener("click", () => {
+  showToast("Logged in (demo).");
+  closeDialog(elements.accountModal);
+});
+
+elements.themeToggle.addEventListener("click", () => {
+  setTheme(state.theme === "dark" ? "light" : "dark");
+});
+
+elements.closeQuickView.addEventListener("click", () => closeDialog(elements.quickViewModal));
+elements.quickViewAdd.addEventListener("click", () => {
+  const productId = Number(elements.quickViewAdd.dataset.id);
+  const quantity = parseQuantity(elements.quickViewQty.value, 1);
+  elements.quickViewQty.value = String(quantity);
+  addToCart(productId, quantity);
+  closeDialog(elements.quickViewModal);
+});
+
+elements.quickViewModal.addEventListener("click", (event) => {
+  const button = event.target.closest(".qty-btn");
+  if (!button) return;
+  const delta = button.dataset.action === "increase" ? 1 : -1;
+  const nextValue = Math.max(1, parseQuantity(elements.quickViewQty.value, 1) + delta);
+  elements.quickViewQty.value = String(nextValue);
+});
+
+elements.quickViewQty.addEventListener("change", () => {
+  normalizeQuantityInput(elements.quickViewQty);
+});
+
+const handleSearchInput = debounce((value) => {
+  state.searchTerm = value;
+  renderProducts();
+}, 250);
 
 elements.searchInput.addEventListener("input", (event) => {
-  state.searchTerm = event.target.value.trim();
-  renderProducts();
+  handleSearchInput(event.target.value.trim());
 });
 
 elements.checkoutButton.addEventListener("click", () => {
@@ -931,6 +1361,17 @@ elements.nextSlide.addEventListener("click", () => {
   startCarousel();
 });
 
+if (elements.carouselDots) {
+  elements.carouselDots.addEventListener("click", (event) => {
+    const dot = event.target.closest(".carousel-dot");
+    if (!dot) return;
+    const index = Number(dot.dataset.slide);
+    if (Number.isNaN(index)) return;
+    showSlide(index);
+    startCarousel();
+  });
+}
+
 elements.carousel.addEventListener("mouseenter", stopCarousel);
 elements.carousel.addEventListener("mouseleave", startCarousel);
 elements.carousel.addEventListener("focusin", stopCarousel);
@@ -943,8 +1384,8 @@ if (typeof motionQuery.addEventListener === "function") {
 }
 
 window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && elements.cartDrawer.classList.contains("open")) {
-    closeCart();
+  if (event.key === "Escape" && activeDialog) {
+    closeActiveDialog();
   }
 });
 

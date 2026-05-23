@@ -16,7 +16,7 @@
     <!-- Header / Navbar -->
     <header class="header" id="siteHeader">
       <div class="top-bar container">
-        <div class="logo" aria-label="ShopMart home">ShopMart</div>
+        <a class="logo" href="/" aria-label="ShopMart home">ShopMart</a>
         <div class="search-wrap">
           <input
             id="searchInput"
@@ -30,16 +30,44 @@
         </button>
         <button
           class="icon-btn"
+          id="wishlistButton"
+          type="button"
+          aria-label="Open wishlist drawer"
+          aria-controls="wishlistDrawer"
+          aria-expanded="false"
+        >
+          <span class="icon">❤</span>
+          <span class="badge" id="wishlistCount" aria-live="polite">0</span>
+        </button>
+        <button
+          class="icon-btn"
           id="cartButton"
           type="button"
-          aria-label="Open cart"
+          aria-label="Open cart drawer"
           aria-controls="cartDrawer"
           aria-expanded="false"
         >
           <span class="icon">🛒</span>
           <span class="badge" id="cartCount" aria-live="polite">0</span>
         </button>
-        <button class="btn-outline" type="button">Login / My Account</button>
+        <button
+          class="icon-btn"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          aria-pressed="false"
+        >
+          <span class="icon" aria-hidden="true">🌙</span>
+        </button>
+        <button
+          class="btn-outline"
+          id="loginButton"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="accountModal"
+        >
+          Login / My Account
+        </button>
       </div>
       <nav class="nav-tabs container" aria-label="Primary navigation">
         <a href="#" class="nav-link">Groceries</a>
@@ -78,6 +106,12 @@
               </div>
             </article>
           </div>
+          <div
+            class="carousel-dots"
+            id="carouselDots"
+            role="tablist"
+            aria-label="Carousel navigation"
+          ></div>
           <button class="carousel-btn prev" id="prevSlide" aria-label="Previous slide">
             ❮
           </button>
@@ -146,10 +180,17 @@
       role="dialog"
       aria-modal="true"
       aria-hidden="true"
+      tabindex="-1"
     >
       <div class="cart-header">
         <h3>Your Cart</h3>
-        <button class="icon-btn" id="closeCart" type="button" aria-label="Close cart">
+        <button
+          class="icon-btn"
+          id="closeCart"
+          type="button"
+          aria-label="Close cart"
+          data-autofocus
+        >
           ✕
         </button>
       </div>
@@ -171,6 +212,32 @@
         <p class="delivery-note">Free delivery above ₹499.</p>
       </div>
     </aside>
+    <aside
+      class="wishlist-drawer"
+      id="wishlistDrawer"
+      aria-label="Wishlist drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      tabindex="-1"
+    >
+      <div class="cart-header">
+        <h3>Your Wishlist</h3>
+        <button
+          class="icon-btn"
+          id="closeWishlist"
+          type="button"
+          aria-label="Close wishlist"
+          data-autofocus
+        >
+          ✕
+        </button>
+      </div>
+      <div class="cart-body" id="wishlistItems"></div>
+      <div class="cart-footer">
+        <p class="delivery-note">Saved items stay here until you remove them.</p>
+      </div>
+    </aside>
     <div class="overlay" id="overlay" aria-hidden="true"></div>
 
     <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
@@ -178,6 +245,108 @@
     </button>
     <div class="toast" id="toast" role="status" aria-live="polite">
       ✓ Added to cart!
+    </div>
+    <div
+      class="modal"
+      id="accountModal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="accountTitle"
+      tabindex="-1"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="accountTitle">Login / My Account</h3>
+          <button
+            class="icon-btn"
+            id="closeAccountModal"
+            type="button"
+            aria-label="Close account modal"
+            data-autofocus
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Welcome back! This is a demo account experience.</p>
+          <label class="modal-field">
+            <span>Email</span>
+            <input type="email" placeholder="you@example.com" autocomplete="email" />
+          </label>
+          <label class="modal-field">
+            <span>Password</span>
+            <input type="password" placeholder="••••••••" autocomplete="current-password" />
+          </label>
+          <button class="btn-primary" id="accountSubmit" type="button">
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal"
+      id="quickViewModal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="quickViewTitle"
+      tabindex="-1"
+    >
+      <div class="modal-content quick-view">
+        <div class="modal-header">
+          <h3 id="quickViewTitle"></h3>
+          <button
+            class="icon-btn"
+            id="closeQuickView"
+            type="button"
+            aria-label="Close quick view"
+            data-autofocus
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-body quick-view-body">
+          <img id="quickViewImage" alt="" loading="lazy" />
+          <div class="quick-view-info">
+            <p class="weight" id="quickViewWeight"></p>
+            <div class="price-row">
+              <span class="price" id="quickViewPrice"></span>
+              <span class="mrp" id="quickViewMrp"></span>
+            </div>
+            <div class="rating" id="quickViewRating"></div>
+            <div class="qty-stepper quick-view-stepper">
+              <button
+                class="qty-btn"
+                data-action="decrease"
+                type="button"
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+              <input
+                class="qty-input"
+                id="quickViewQty"
+                type="number"
+                min="1"
+                value="1"
+                aria-label="Quantity"
+              />
+              <button
+                class="qty-btn"
+                data-action="increase"
+                type="button"
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+            <button class="btn-primary" id="quickViewAdd" type="button">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
