@@ -462,9 +462,6 @@ const elements = {
   quickViewQty: document.getElementById("quickViewQty"),
   quickViewAdd: document.getElementById("quickViewAdd"),
   themeToggle: document.getElementById("themeToggle"),
-  newsletterForm: document.getElementById("newsletterForm"),
-  newsletterEmail: document.getElementById("newsletterEmail"),
-  bottomNav: document.getElementById("bottomNav"),
 };
 
 let toastTimer;
@@ -513,17 +510,6 @@ const debounce = (callback, delay = 200) => {
     clearTimeout(timer);
     timer = setTimeout(() => callback(...args), delay);
   };
-};
-
-const setFooterAccordions = () => {
-  const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-  document.querySelectorAll("[data-accordion]").forEach((details) => {
-    if (isDesktop) {
-      details.setAttribute("open", "");
-    } else {
-      details.removeAttribute("open");
-    }
-  });
 };
 
 const trapFocus = (container) => {
@@ -1217,7 +1203,6 @@ const init = () => {
   updateCartBadge();
   updateWishlistBadge();
   renderCarouselDots();
-  setFooterAccordions();
   handleMotionPreference();
   handleScroll();
 };
@@ -1358,40 +1343,6 @@ elements.searchInput.addEventListener("input", (event) => {
   handleSearchInput(event.target.value.trim());
 });
 
-if (elements.newsletterForm) {
-  elements.newsletterForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const email = elements.newsletterEmail ? elements.newsletterEmail.value.trim() : "";
-    if (!email) {
-      showToast("Enter a valid email.");
-      return;
-    }
-    showToast("Thanks for subscribing!");
-    elements.newsletterForm.reset();
-  });
-}
-
-if (elements.bottomNav) {
-  elements.bottomNav.addEventListener("click", (event) => {
-    const item = event.target.closest(".bottom-nav-item");
-    if (!item) return;
-    const action = item.dataset.action;
-    if (action === "home") {
-      window.scrollTo({ top: 0, behavior: getScrollBehavior() });
-    }
-    if (action === "search") {
-      elements.searchInput.focus();
-      elements.searchInput.scrollIntoView({ behavior: getScrollBehavior(), block: "center" });
-    }
-    if (action === "cart") {
-      openCart();
-    }
-    if (action === "account") {
-      openDialog(elements.accountModal, item);
-    }
-  });
-}
-
 elements.checkoutButton.addEventListener("click", () => {
   alert("Checkout is a demo flow. Thanks for shopping!");
 });
@@ -1439,5 +1390,4 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("scroll", handleScroll);
-window.addEventListener("resize", setFooterAccordions);
 window.addEventListener("load", init);
