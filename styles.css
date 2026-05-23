@@ -472,18 +472,42 @@ a {
   top: 12px;
   right: 12px;
   border: none;
-  background: #fff0f0;
+  background: rgba(255, 255, 255, 0.9);
   color: var(--muted);
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+.wishlist-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  fill: none;
+  transition: all 0.2s ease;
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.1);
+  color: var(--danger);
+  background: var(--white);
 }
 
 .wishlist-btn.active {
   color: var(--danger);
-  background: #ffe3e3;
+  background: #fff0f0;
+}
+
+.wishlist-btn.active svg {
+  fill: var(--danger);
 }
 
 .product-card h3 {
