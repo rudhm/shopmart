@@ -388,7 +388,8 @@ const products = [
   {
     id: 34,
     name: "LEGO Classic Bricks",
-    imageUrl: "https://placehold.co/300x300/fff3cd/555?text=LEGO+Bricks",
+    imageUrl:
+      "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQxtDSDoA8Zs6mz2RnS76yAJDHuV1lfAbLPOpsr7w4uYonti3MPg9YeZEBtOd6yxi5kEhoBUKOOdL4kXUNC3OlsvY8g8ueSCw",
     category: "Kids Toys",
     weight: "1 set",
     price: 799,
@@ -400,7 +401,8 @@ const products = [
   {
     id: 35,
     name: "Hot Wheels Racer Car",
-    imageUrl: "https://placehold.co/300x300/ffe8e8/555?text=Hot+Wheels",
+    imageUrl:
+      "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSDEYXTOidJQlbuEFOyH69EbYDhr-uQy68RaIS9F_yYwisOOqpJwd5WZEHPm_eB1gVrSoeqzSIojOA2e-VpLTqxGTM0J4LtulmgyHcetkvB1_fm_FQFkgM_7K0",
     category: "Kids Toys",
     weight: "1 pc",
     price: 149,
@@ -412,7 +414,8 @@ const products = [
   {
     id: 36,
     name: "Barbie Fashion Doll",
-    imageUrl: "https://placehold.co/300x300/ffe8f8/555?text=Barbie+Doll",
+    imageUrl:
+      "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQn2D8wL8tulwx1AGGSVqGpu7T_2u4jA_ZjC_chl_SlzAjxRZnaH9h0aOLNO3QuTeVhHYT0ADl2-zSe9UEz2uxChuqj55ZZ7sRoun4YrBnMpvO2RP8oKAodhA",
     category: "Kids Toys",
     weight: "1 pc",
     price: 999,
