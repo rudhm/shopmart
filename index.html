@@ -351,36 +351,87 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <div class="logo">ShopMart</div>
-          <p class="tagline">Fresh. Fast. Affordable.</p>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Help Center</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Connect</h4>
-          <div class="socials">
-            <span aria-label="Facebook">📘</span>
-            <span aria-label="Instagram">📸</span>
-            <span aria-label="Twitter">🐦</span>
-            <span aria-label="YouTube">▶️</span>
+      <div class="container">
+        <!-- Footer Top: Newsletter -->
+        <div class="footer-top">
+          <div class="footer-newsletter">
+            <h4>Join our Fresh Club</h4>
+            <p>Get weekly updates on deals, recipes, and new arrivals.</p>
           </div>
-          <div class="app-buttons">
-            <button type="button" class="btn-outline">Get it on App Store</button>
-            <button type="button" class="btn-outline">Get it on Play Store</button>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit" class="btn-primary">Subscribe</button>
+          </form>
+        </div>
+
+        <!-- Footer Main: Links & Brand -->
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="logo">ShopMart</div>
+            <p class="tagline">
+              Bringing the freshest groceries and daily essentials right to your doorstep since 2025.
+            </p>
+            <div class="footer-socials">
+              <a href="#" class="social-icon" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+              </a>
+              <a href="#" class="social-icon" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="#" class="social-icon" aria-label="Twitter">
+                <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg>
+              </a>
+              <a href="#" class="social-icon" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <h4>Shop</h4>
+            <ul>
+              <li><a href="#">Groceries</a></li>
+              <li><a href="#">Electronics</a></li>
+              <li><a href="#">Fashion</a></li>
+              <li><a href="#">Home Decor</a></li>
+              <li><a href="#">Offers</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-links">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">Track Order</a></li>
+              <li><a href="#">Shipping Policy</a></li>
+              <li><a href="#">Return & Refund</a></li>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-links">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Affiliates</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer Bottom: Payment & Copyright -->
+        <div class="footer-bottom">
+          <p class="copyright">© 2025 ShopMart Demo. All rights reserved.</p>
+          <div class="payment-methods">
+            <span title="Visa">💳</span>
+            <span title="Mastercard">🎴</span>
+            <span title="UPI">📱</span>
+            <span title="Net Banking">🏦</span>
           </div>
         </div>
       </div>
-      <p class="copyright">© 2025 ShopMart Demo. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
