@@ -385,45 +385,6 @@ const products = [
     rating: 4.6,
     reviews: "4.1k",
   },
-  {
-    id: 34,
-    name: "LEGO Classic Bricks",
-    imageUrl:
-      "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQxtDSDoA8Zs6mz2RnS76yAJDHuV1lfAbLPOpsr7w4uYonti3MPg9YeZEBtOd6yxi5kEhoBUKOOdL4kXUNC3OlsvY8g8ueSCw",
-    category: "Kids Toys",
-    weight: "1 set",
-    price: 799,
-    originalPrice: 899,
-    discount: 11,
-    rating: 4.8,
-    reviews: "2.6k",
-  },
-  {
-    id: 35,
-    name: "Hot Wheels Racer Car",
-    imageUrl:
-      "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSDEYXTOidJQlbuEFOyH69EbYDhr-uQy68RaIS9F_yYwisOOqpJwd5WZEHPm_eB1gVrSoeqzSIojOA2e-VpLTqxGTM0J4LtulmgyHcetkvB1_fm_FQFkgM_7K0",
-    category: "Kids Toys",
-    weight: "1 pc",
-    price: 149,
-    originalPrice: 179,
-    discount: 17,
-    rating: 4.7,
-    reviews: "5.5k",
-  },
-  {
-    id: 36,
-    name: "Barbie Fashion Doll",
-    imageUrl:
-      "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQn2D8wL8tulwx1AGGSVqGpu7T_2u4jA_ZjC_chl_SlzAjxRZnaH9h0aOLNO3QuTeVhHYT0ADl2-zSe9UEz2uxChuqj55ZZ7sRoun4YrBnMpvO2RP8oKAodhA",
-    category: "Kids Toys",
-    weight: "1 pc",
-    price: 999,
-    originalPrice: 1199,
-    discount: 17,
-    rating: 4.6,
-    reviews: "1.8k",
-  },
 ];
 
 // Category metadata for the grid and tabs
@@ -435,11 +396,9 @@ const categoryMeta = [
   { label: "Beverages", emoji: "🥤" },
   { label: "Spices", emoji: "🌶️" },
   { label: "Household Essentials", emoji: "🏠" },
-  { label: "Kids Toys", emoji: "🧸" },
   { label: "Cleaning", emoji: "🧹" },
   { label: "Staples", emoji: "🍚" },
   { label: "Cooking Essentials", emoji: "🍳" },
-  { label: "Health", emoji: "💊" },
 ];
 
 const DELIVERY_THRESHOLD = 499;
@@ -698,7 +657,7 @@ const renderProducts = () => {
       const deliveryEligible = product.price > 99;
       const discountClass = product.discount === 0 ? "neutral" : "";
       const isWishlisted = state.wishlist.has(product.id);
-      const productImage = getProductImage(product.name);
+      const productImage = product.imageUrl || getProductImage(product.name);
       return `
         <div class="product-card">
           <div class="product-badges">
@@ -754,7 +713,7 @@ const renderCart = () => {
     elements.cartItems.innerHTML = Array.from(state.cart.entries())
       .map(([id, qty]) => {
         const product = products.find((item) => item.id === id);
-        const productImage = getProductImage(product.name);
+        const productImage = product.imageUrl || getProductImage(product.name);
         return `
           <div class="cart-item">
             <img src="${productImage}" alt="${product.name}" loading="lazy" />
@@ -805,13 +764,18 @@ const renderCart = () => {
 };
 
 // Cart helpers
-const addToCart = (id) => {
+const addToCart = (id, quantity) => {
+  const sanitizedQty = Number.isFinite(quantity) ? Math.floor(quantity) : 0;
+  if (sanitizedQty <= 0) {
+    showToast("Enter a valid quantity.");
+    return;
+  }
   const currentQty = state.cart.get(id) || 0;
-  state.cart.set(id, currentQty + 1);
+  state.cart.set(id, currentQty + sanitizedQty);
   updateCartBadge();
   renderCart();
   persistCart();
-  showToast("✓ Added to cart!");
+  showToast(`✓ Added ${sanitizedQty} to cart!`);
 };
 
 const updateCartQty = (id, delta) => {
@@ -900,7 +864,22 @@ elements.categoryTabs.addEventListener("click", (event) => {
 elements.productGrid.addEventListener("click", (event) => {
   const addButton = event.target.closest(".add-to-cart");
   if (addButton) {
-    addToCart(Number(addButton.dataset.id));
+    const productId = Number(addButton.dataset.id);
+    const product = products.find((item) => item.id === productId);
+    const input = window.prompt(
+      `Enter quantity for ${product ? product.name : "this item"}:`,
+      "1"
+    );
+    if (input === null) {
+      showToast("Add to cart canceled.");
+      return;
+    }
+    const quantity = Number.parseInt(input, 10);
+    if (!Number.isFinite(quantity) || quantity <= 0) {
+      showToast("Enter a valid quantity.");
+      return;
+    }
+    addToCart(productId, quantity);
     return;
   }
 
