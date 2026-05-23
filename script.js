@@ -3,7 +3,7 @@ const products = [
   {
     id: 1,
     name: "Classic Vanilla Wafers",
-    imageUrl: "https://picsum.photos/seed/vanilla-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?vanilla,wafer",
     category: "Wafers",
     weight: "200g",
     price: 45,
@@ -15,7 +15,7 @@ const products = [
   {
     id: 2,
     name: "Chocolate Cream Wafers",
-    imageUrl: "https://picsum.photos/seed/chocolate-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?chocolate,wafer",
     category: "Wafers",
     weight: "200g",
     price: 55,
@@ -27,7 +27,7 @@ const products = [
   {
     id: 3,
     name: "Strawberry Wafer Rolls",
-    imageUrl: "https://picsum.photos/seed/strawberry-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?strawberry,wafer",
     category: "Wafers",
     weight: "150g",
     price: 60,
@@ -39,7 +39,7 @@ const products = [
   {
     id: 4,
     name: "Hazelnut Wafer Bites",
-    imageUrl: "https://picsum.photos/seed/hazelnut-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?hazelnut,wafer",
     category: "Wafers",
     weight: "180g",
     price: 85,
@@ -51,7 +51,7 @@ const products = [
   {
     id: 5,
     name: "Dark Choco Wafer Sticks",
-    imageUrl: "https://picsum.photos/seed/dark-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?dark,wafer",
     category: "Wafers",
     weight: "120g",
     price: 65,
@@ -63,7 +63,7 @@ const products = [
   {
     id: 6,
     name: "Caramel Wafer Bars",
-    imageUrl: "https://picsum.photos/seed/caramel-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?caramel,wafer",
     category: "Wafers",
     weight: "6 pack",
     price: 70,
@@ -75,7 +75,7 @@ const products = [
   {
     id: 7,
     name: "Coconut Wafer Cookies",
-    imageUrl: "https://picsum.photos/seed/coconut-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?coconut,wafer",
     category: "Wafers",
     weight: "160g",
     price: 58,
@@ -87,7 +87,7 @@ const products = [
   {
     id: 8,
     name: "Almond Crunch Wafers",
-    imageUrl: "https://picsum.photos/seed/almond-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?almond,wafer",
     category: "Wafers",
     weight: "180g",
     price: 92,
@@ -99,7 +99,7 @@ const products = [
   {
     id: 9,
     name: "Lay's Classic Salted",
-    imageUrl: "https://picsum.photos/seed/potato-chips/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?potato,chips",
     category: "Snacks",
     weight: "78g",
     price: 20,
@@ -111,7 +111,7 @@ const products = [
   {
     id: 10,
     name: "Haldiram's Bhujia",
-    imageUrl: "https://picsum.photos/seed/bhujia-snack/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?bhujia,snack",
     category: "Snacks",
     weight: "400g",
     price: 149,
@@ -123,7 +123,7 @@ const products = [
   {
     id: 11,
     name: "Oreo Biscuits",
-    imageUrl: "https://picsum.photos/seed/oreo-cookies/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?cookies,cream",
     category: "Snacks",
     weight: "300g",
     price: 85,
@@ -135,7 +135,7 @@ const products = [
   {
     id: 12,
     name: "Too Yumm Multigrain",
-    imageUrl: "https://picsum.photos/seed/multigrain-chips/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?multigrain,chips",
     category: "Snacks",
     weight: "150g",
     price: 55,
@@ -147,7 +147,7 @@ const products = [
   {
     id: 13,
     name: "Tropicana Orange Juice",
-    imageUrl: "https://cdn.dummyjson.com/products/images/groceries/Juice/1.webp",
+    imageUrl: "https://source.unsplash.com/300x300/?orange,juice",
     category: "Beverages",
     weight: "1L",
     price: 99,
@@ -159,7 +159,7 @@ const products = [
   {
     id: 14,
     name: "Red Bull Energy Drink",
-    imageUrl: "https://picsum.photos/seed/energy-drink/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?energy,drink",
     category: "Beverages",
     weight: "250ml",
     price: 115,
@@ -171,7 +171,7 @@ const products = [
   {
     id: 15,
     name: "Bisleri Water",
-    imageUrl: "https://cdn.dummyjson.com/products/images/groceries/Water/1.webp",
+    imageUrl: "https://source.unsplash.com/300x300/?bottled,water",
     category: "Beverages",
     weight: "1L",
     price: 20,
@@ -183,7 +183,7 @@ const products = [
   {
     id: 16,
     name: "Nescafé Classic Coffee",
-    imageUrl: "https://cdn.dummyjson.com/products/images/groceries/Nescafe%20Coffee/1.webp",
+    imageUrl: "https://source.unsplash.com/300x300/?instant,coffee",
     category: "Beverages",
     weight: "200g",
     price: 299,
@@ -195,7 +195,7 @@ const products = [
   {
     id: 17,
     name: "Dove Soap",
-    imageUrl: "https://picsum.photos/seed/soap-bar/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?soap,bar",
     category: "Beauty & Cosmetics",
     weight: "100g",
     price: 55,
@@ -207,7 +207,7 @@ const products = [
   {
     id: 18,
     name: "Head & Shoulders",
-    imageUrl: "https://picsum.photos/seed/shampoo-bottle/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?shampoo,bottle",
     category: "Beauty & Cosmetics",
     weight: "340ml",
     price: 299,
@@ -219,7 +219,7 @@ const products = [
   {
     id: 19,
     name: "Colgate MaxFresh",
-    imageUrl: "https://picsum.photos/seed/toothpaste/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?toothpaste,tube",
     category: "Beauty & Cosmetics",
     weight: "150g",
     price: 89,
@@ -231,7 +231,7 @@ const products = [
   {
     id: 20,
     name: "Vaseline Body Lotion",
-    imageUrl: "https://picsum.photos/seed/body-lotion/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?body,lotion",
     category: "Beauty & Cosmetics",
     weight: "300ml",
     price: 199,
@@ -243,7 +243,7 @@ const products = [
   {
     id: 21,
     name: "Fortune Basmati Rice",
-    imageUrl: "https://cdn.dummyjson.com/products/images/groceries/Rice/1.webp",
+    imageUrl: "https://source.unsplash.com/300x300/?basmati,rice",
     category: "Staples",
     weight: "5kg",
     price: 399,
@@ -255,7 +255,7 @@ const products = [
   {
     id: 22,
     name: "Tata Salt",
-    imageUrl: "https://picsum.photos/seed/salt-pack/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?salt,pack",
     category: "Staples",
     weight: "1kg",
     price: 24,
@@ -267,7 +267,7 @@ const products = [
   {
     id: 23,
     name: "Aashirvaad Atta",
-    imageUrl: "https://picsum.photos/seed/wheat-flour/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?wheat,flour",
     category: "Staples",
     weight: "5kg",
     price: 249,
@@ -279,7 +279,7 @@ const products = [
   {
     id: 24,
     name: "Saffola Gold Oil",
-    imageUrl: "https://cdn.dummyjson.com/products/images/groceries/Cooking%20Oil/1.webp",
+    imageUrl: "https://source.unsplash.com/300x300/?cooking,oil",
     category: "Staples",
     weight: "1L",
     price: 189,
@@ -291,7 +291,7 @@ const products = [
   {
     id: 25,
     name: "Cadbury Silk",
-    imageUrl: "https://picsum.photos/seed/chocolate-bar/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?chocolate,bar",
     category: "Chocolates",
     weight: "110g",
     price: 80,
@@ -303,7 +303,7 @@ const products = [
   {
     id: 26,
     name: "KitKat Classic",
-    imageUrl: "https://picsum.photos/seed/kitkat-wafer/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?chocolate,wafer",
     category: "Chocolates",
     weight: "45g",
     price: 25,
@@ -315,7 +315,7 @@ const products = [
   {
     id: 27,
     name: "Ferrero Rocher",
-    imageUrl: "https://picsum.photos/seed/chocolate-praline/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?chocolate,praline",
     category: "Chocolates",
     weight: "200g",
     price: 450,
@@ -327,7 +327,7 @@ const products = [
   {
     id: 28,
     name: "MDH Garam Masala",
-    imageUrl: "https://picsum.photos/seed/garam-masala/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?garam,masala",
     category: "Spices",
     weight: "100g",
     price: 65,
@@ -339,7 +339,7 @@ const products = [
   {
     id: 29,
     name: "Everest Chilli Powder",
-    imageUrl: "https://picsum.photos/seed/chili-powder/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?chili,powder",
     category: "Spices",
     weight: "100g",
     price: 58,
@@ -351,7 +351,7 @@ const products = [
   {
     id: 30,
     name: "Tata Sampann Turmeric",
-    imageUrl: "https://picsum.photos/seed/turmeric-spice/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?turmeric,spice",
     category: "Spices",
     weight: "200g",
     price: 72,
@@ -363,7 +363,7 @@ const products = [
   {
     id: 31,
     name: "Surf Excel Detergent",
-    imageUrl: "https://picsum.photos/seed/detergent/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?detergent,pack",
     category: "Household Essentials",
     weight: "2kg",
     price: 299,
@@ -375,7 +375,7 @@ const products = [
   {
     id: 32,
     name: "Vim Dishwash Gel",
-    imageUrl: "https://picsum.photos/seed/dishwash-liquid/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?dishwash,liquid",
     category: "Household Essentials",
     weight: "500ml",
     price: 109,
@@ -387,7 +387,7 @@ const products = [
   {
     id: 33,
     name: "Harpic Toilet Cleaner",
-    imageUrl: "https://picsum.photos/seed/toilet-cleaner/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?toilet,cleaner",
     category: "Household Essentials",
     weight: "1L",
     price: 189,
@@ -399,7 +399,7 @@ const products = [
   {
     id: 34,
     name: "LEGO Classic Bricks",
-    imageUrl: "https://picsum.photos/seed/lego-bricks/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?lego,bricks",
     category: "Kids Toys",
     weight: "1 set",
     price: 799,
@@ -411,7 +411,7 @@ const products = [
   {
     id: 35,
     name: "Hot Wheels Racer Car",
-    imageUrl: "https://picsum.photos/seed/toy-car/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?toy,car",
     category: "Kids Toys",
     weight: "1 pc",
     price: 149,
@@ -423,7 +423,7 @@ const products = [
   {
     id: 36,
     name: "Barbie Fashion Doll",
-    imageUrl: "https://picsum.photos/seed/fashion-doll/300/300",
+    imageUrl: "https://source.unsplash.com/300x300/?fashion,doll",
     category: "Kids Toys",
     weight: "1 pc",
     price: 999,
