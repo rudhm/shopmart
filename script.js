@@ -490,44 +490,8 @@ const formatPrice = (value) => `₹${value}`;
 
 const getScrollBehavior = () => (motionQuery.matches ? "auto" : "smooth");
 
-const PRODUCT_IMAGE_PLACEHOLDER = "https://placehold.co/300x300?text=Loading";
-
-const updateProductImage = (product) => {
-  if (!product.imageUrl) return;
-  const images = document.querySelectorAll(`img[data-product-id="${product.id}"]`);
-  images.forEach((img) => {
-    img.src = product.imageUrl;
-  });
-};
-
-const loadProductImage = async (product) => {
-  if (product.imageUrl) return;
-  const searchUrl = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(
-    product.name
-  )}&search_simple=1&action=process&json=1&page_size=1&fields=image_url`;
-  try {
-    const res = await fetch(searchUrl);
-    if (!res.ok) {
-      console.warn(`Unable to fetch image for ${product.name}.`, res.status);
-      return;
-    }
-    const data = await res.json();
-    if (data.products?.[0]?.image_url) {
-      product.imageUrl = data.products[0].image_url;
-      updateProductImage(product);
-    }
-  } catch (error) {
-    console.warn(`Unable to fetch image for ${product.name}.`, error);
-  }
-};
-
-const loadMissingProductImages = () => {
-  products.forEach((product) => {
-    if (!product.imageUrl) {
-      void loadProductImage(product);
-    }
-  });
-};
+const getProductImage = (name) =>
+  `https://placehold.co/300x300?text=${encodeURIComponent(name)}`;
 
 const canPersist = () =>
   typeof window !== "undefined" && Object.prototype.hasOwnProperty.call(window, "localStorage");
@@ -734,7 +698,7 @@ const renderProducts = () => {
       const deliveryEligible = product.price > 99;
       const discountClass = product.discount === 0 ? "neutral" : "";
       const isWishlisted = state.wishlist.has(product.id);
-      const productImage = product.imageUrl || PRODUCT_IMAGE_PLACEHOLDER;
+      const productImage = getProductImage(product.name);
       return `
         <div class="product-card">
           <div class="product-badges">
@@ -753,12 +717,7 @@ const renderProducts = () => {
           >
             ❤
           </button>
-          <img
-            src="${productImage}"
-            alt="${product.name}"
-            data-product-id="${product.id}"
-            loading="lazy"
-          />
+          <img src="${productImage}" alt="${product.name}" loading="lazy" />
           <h3>${product.name}</h3>
           <p class="weight">${product.weight}</p>
           <div class="price-row">
@@ -795,15 +754,10 @@ const renderCart = () => {
     elements.cartItems.innerHTML = Array.from(state.cart.entries())
       .map(([id, qty]) => {
         const product = products.find((item) => item.id === id);
-        const productImage = product.imageUrl || PRODUCT_IMAGE_PLACEHOLDER;
+        const productImage = getProductImage(product.name);
         return `
           <div class="cart-item">
-            <img
-              src="${productImage}"
-              alt="${product.name}"
-              data-product-id="${product.id}"
-              loading="lazy"
-            />
+            <img src="${productImage}" alt="${product.name}" loading="lazy" />
             <div>
               <h4>${product.name}</h4>
               <p class="weight">${product.weight}</p>
@@ -924,7 +878,6 @@ const init = () => {
   renderCategoryGrid();
   renderCategoryTabs();
   renderProducts();
-  loadMissingProductImages();
   renderCart();
   updateCartBadge();
   handleMotionPreference();
