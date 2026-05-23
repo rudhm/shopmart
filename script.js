@@ -3,7 +3,7 @@ const products = [
   {
     id: 1,
     name: "Classic Vanilla Wafers",
-    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
+    imageUrl: "https://m.media-amazon.com/images/I/51wwmHvS7+L._AC_UL320_.jpg",
     category: "Wafers",
     weight: "200g",
     price: 45,
@@ -15,7 +15,7 @@ const products = [
   {
     id: 2,
     name: "Chocolate Cream Wafers",
-    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
+    imageUrl: "https://m.media-amazon.com/images/I/710s+hyguhL._AC_UL320_.jpg",
     category: "Wafers",
     weight: "200g",
     price: 55,
@@ -27,7 +27,7 @@ const products = [
   {
     id: 3,
     name: "Strawberry Wafer Rolls",
-    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
+    imageUrl: "https://m.media-amazon.com/images/I/51tUI0hUdrL._AC_UL320_.jpg",
     category: "Wafers",
     weight: "150g",
     price: 60,
@@ -178,6 +178,7 @@ const products = [
   {
     id: 16,
     name: "Nescafé Classic Coffee",
+    imageUrl: "https://m.media-amazon.com/images/I/71WjTHrTwJL._AC_UL320_.jpg",
     category: "Beverages",
     weight: "200g",
     price: 299,
@@ -843,7 +844,7 @@ const renderProducts = () => {
             aria-label="${wishlistLabel}"
             aria-pressed="${isWishlisted}"
           >
-            ❤
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
           </button>
           <button
             class="quick-view-trigger"
