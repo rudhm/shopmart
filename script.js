@@ -3,6 +3,7 @@ const products = [
   {
     id: 1,
     name: "Classic Vanilla Wafers",
+    imageUrl: "https://source.unsplash.com/300x300/?vanilla,wafer",
     category: "Wafers",
     weight: "200g",
     price: 45,
@@ -14,6 +15,7 @@ const products = [
   {
     id: 2,
     name: "Chocolate Cream Wafers",
+    imageUrl: "https://source.unsplash.com/300x300/?chocolate,wafer",
     category: "Wafers",
     weight: "200g",
     price: 55,
@@ -25,6 +27,7 @@ const products = [
   {
     id: 3,
     name: "Strawberry Wafer Rolls",
+    imageUrl: "https://source.unsplash.com/300x300/?strawberry,wafer",
     category: "Wafers",
     weight: "150g",
     price: 60,
@@ -36,6 +39,7 @@ const products = [
   {
     id: 4,
     name: "Hazelnut Wafer Bites",
+    imageUrl: "https://source.unsplash.com/300x300/?hazelnut,wafer",
     category: "Wafers",
     weight: "180g",
     price: 85,
@@ -47,6 +51,7 @@ const products = [
   {
     id: 5,
     name: "Dark Choco Wafer Sticks",
+    imageUrl: "https://source.unsplash.com/300x300/?dark,wafer",
     category: "Wafers",
     weight: "120g",
     price: 65,
@@ -58,6 +63,7 @@ const products = [
   {
     id: 6,
     name: "Caramel Wafer Bars",
+    imageUrl: "https://source.unsplash.com/300x300/?caramel,wafer",
     category: "Wafers",
     weight: "6 pack",
     price: 70,
@@ -69,6 +75,7 @@ const products = [
   {
     id: 7,
     name: "Coconut Wafer Cookies",
+    imageUrl: "https://source.unsplash.com/300x300/?coconut,wafer",
     category: "Wafers",
     weight: "160g",
     price: 58,
@@ -80,6 +87,7 @@ const products = [
   {
     id: 8,
     name: "Almond Crunch Wafers",
+    imageUrl: "https://source.unsplash.com/300x300/?almond,wafer",
     category: "Wafers",
     weight: "180g",
     price: 92,
@@ -91,6 +99,7 @@ const products = [
   {
     id: 9,
     name: "Lay's Classic Salted",
+    imageUrl: "https://source.unsplash.com/300x300/?potato,chips",
     category: "Snacks",
     weight: "78g",
     price: 20,
@@ -102,6 +111,7 @@ const products = [
   {
     id: 10,
     name: "Haldiram's Bhujia",
+    imageUrl: "https://source.unsplash.com/300x300/?bhujia,snack",
     category: "Snacks",
     weight: "400g",
     price: 149,
@@ -113,6 +123,7 @@ const products = [
   {
     id: 11,
     name: "Oreo Biscuits",
+    imageUrl: "https://source.unsplash.com/300x300/?cookies,cream",
     category: "Snacks",
     weight: "300g",
     price: 85,
@@ -124,6 +135,7 @@ const products = [
   {
     id: 12,
     name: "Too Yumm Multigrain",
+    imageUrl: "https://source.unsplash.com/300x300/?multigrain,chips",
     category: "Snacks",
     weight: "150g",
     price: 55,
@@ -135,6 +147,7 @@ const products = [
   {
     id: 13,
     name: "Tropicana Orange Juice",
+    imageUrl: "https://source.unsplash.com/300x300/?orange,juice",
     category: "Beverages",
     weight: "1L",
     price: 99,
@@ -146,6 +159,7 @@ const products = [
   {
     id: 14,
     name: "Red Bull Energy Drink",
+    imageUrl: "https://source.unsplash.com/300x300/?energy,drink",
     category: "Beverages",
     weight: "250ml",
     price: 115,
@@ -157,6 +171,7 @@ const products = [
   {
     id: 15,
     name: "Bisleri Water",
+    imageUrl: "https://source.unsplash.com/300x300/?bottled,water",
     category: "Beverages",
     weight: "1L",
     price: 20,
@@ -168,6 +183,7 @@ const products = [
   {
     id: 16,
     name: "Nescafé Classic Coffee",
+    imageUrl: "https://source.unsplash.com/300x300/?instant,coffee",
     category: "Beverages",
     weight: "200g",
     price: 299,
@@ -179,6 +195,7 @@ const products = [
   {
     id: 17,
     name: "Dove Soap",
+    imageUrl: "https://source.unsplash.com/300x300/?soap,bar",
     category: "Beauty & Cosmetics",
     weight: "100g",
     price: 55,
@@ -190,6 +207,7 @@ const products = [
   {
     id: 18,
     name: "Head & Shoulders",
+    imageUrl: "https://source.unsplash.com/300x300/?shampoo,bottle",
     category: "Beauty & Cosmetics",
     weight: "340ml",
     price: 299,
@@ -201,6 +219,7 @@ const products = [
   {
     id: 19,
     name: "Colgate MaxFresh",
+    imageUrl: "https://source.unsplash.com/300x300/?toothpaste,tube",
     category: "Beauty & Cosmetics",
     weight: "150g",
     price: 89,
@@ -212,6 +231,7 @@ const products = [
   {
     id: 20,
     name: "Vaseline Body Lotion",
+    imageUrl: "https://source.unsplash.com/300x300/?body,lotion",
     category: "Beauty & Cosmetics",
     weight: "300ml",
     price: 199,
@@ -223,6 +243,7 @@ const products = [
   {
     id: 21,
     name: "Fortune Basmati Rice",
+    imageUrl: "https://source.unsplash.com/300x300/?basmati,rice",
     category: "Staples",
     weight: "5kg",
     price: 399,
@@ -234,6 +255,7 @@ const products = [
   {
     id: 22,
     name: "Tata Salt",
+    imageUrl: "https://source.unsplash.com/300x300/?salt,pack",
     category: "Staples",
     weight: "1kg",
     price: 24,
@@ -245,6 +267,7 @@ const products = [
   {
     id: 23,
     name: "Aashirvaad Atta",
+    imageUrl: "https://source.unsplash.com/300x300/?wheat,flour",
     category: "Staples",
     weight: "5kg",
     price: 249,
@@ -256,6 +279,7 @@ const products = [
   {
     id: 24,
     name: "Saffola Gold Oil",
+    imageUrl: "https://source.unsplash.com/300x300/?cooking,oil",
     category: "Staples",
     weight: "1L",
     price: 189,
@@ -267,6 +291,7 @@ const products = [
   {
     id: 25,
     name: "Cadbury Silk",
+    imageUrl: "https://source.unsplash.com/300x300/?chocolate,bar",
     category: "Chocolates",
     weight: "110g",
     price: 80,
@@ -278,6 +303,7 @@ const products = [
   {
     id: 26,
     name: "KitKat Classic",
+    imageUrl: "https://source.unsplash.com/300x300/?chocolate,wafer",
     category: "Chocolates",
     weight: "45g",
     price: 25,
@@ -289,6 +315,7 @@ const products = [
   {
     id: 27,
     name: "Ferrero Rocher",
+    imageUrl: "https://source.unsplash.com/300x300/?chocolate,praline",
     category: "Chocolates",
     weight: "200g",
     price: 450,
@@ -300,6 +327,7 @@ const products = [
   {
     id: 28,
     name: "MDH Garam Masala",
+    imageUrl: "https://source.unsplash.com/300x300/?garam,masala",
     category: "Spices",
     weight: "100g",
     price: 65,
@@ -311,6 +339,7 @@ const products = [
   {
     id: 29,
     name: "Everest Chilli Powder",
+    imageUrl: "https://source.unsplash.com/300x300/?chili,powder",
     category: "Spices",
     weight: "100g",
     price: 58,
@@ -322,6 +351,7 @@ const products = [
   {
     id: 30,
     name: "Tata Sampann Turmeric",
+    imageUrl: "https://source.unsplash.com/300x300/?turmeric,spice",
     category: "Spices",
     weight: "200g",
     price: 72,
@@ -333,6 +363,7 @@ const products = [
   {
     id: 31,
     name: "Surf Excel Detergent",
+    imageUrl: "https://source.unsplash.com/300x300/?detergent,pack",
     category: "Household Essentials",
     weight: "2kg",
     price: 299,
@@ -344,6 +375,7 @@ const products = [
   {
     id: 32,
     name: "Vim Dishwash Gel",
+    imageUrl: "https://source.unsplash.com/300x300/?dishwash,liquid",
     category: "Household Essentials",
     weight: "500ml",
     price: 109,
@@ -355,6 +387,7 @@ const products = [
   {
     id: 33,
     name: "Harpic Toilet Cleaner",
+    imageUrl: "https://source.unsplash.com/300x300/?toilet,cleaner",
     category: "Household Essentials",
     weight: "1L",
     price: 189,
@@ -366,6 +399,7 @@ const products = [
   {
     id: 34,
     name: "LEGO Classic Bricks",
+    imageUrl: "https://source.unsplash.com/300x300/?lego,bricks",
     category: "Kids Toys",
     weight: "1 set",
     price: 799,
@@ -377,6 +411,7 @@ const products = [
   {
     id: 35,
     name: "Hot Wheels Racer Car",
+    imageUrl: "https://source.unsplash.com/300x300/?toy,car",
     category: "Kids Toys",
     weight: "1 pc",
     price: 149,
@@ -388,6 +423,7 @@ const products = [
   {
     id: 36,
     name: "Barbie Fashion Doll",
+    imageUrl: "https://source.unsplash.com/300x300/?fashion,doll",
     category: "Kids Toys",
     weight: "1 pc",
     price: 999,
@@ -461,9 +497,6 @@ let activeSlideIndex = 0;
 const formatPrice = (value) => `₹${value}`;
 
 const getScrollBehavior = () => (motionQuery.matches ? "auto" : "smooth");
-
-const getProductImage = (name) =>
-  `https://placehold.co/200x200?text=${encodeURIComponent(name)}`;
 
 const canPersist = () =>
   typeof window !== "undefined" && Object.prototype.hasOwnProperty.call(window, "localStorage");
@@ -688,7 +721,7 @@ const renderProducts = () => {
           >
             ❤
           </button>
-          <img src="${getProductImage(product.name)}" alt="${product.name}" />
+          <img src="${product.imageUrl}" alt="${product.name}" />
           <h3>${product.name}</h3>
           <p class="weight">${product.weight}</p>
           <div class="price-row">
@@ -727,7 +760,7 @@ const renderCart = () => {
         const product = products.find((item) => item.id === id);
         return `
           <div class="cart-item">
-            <img src="${getProductImage(product.name)}" alt="${product.name}" />
+            <img src="${product.imageUrl}" alt="${product.name}" />
             <div>
               <h4>${product.name}</h4>
               <p class="weight">${product.weight}</p>
