@@ -75,6 +75,12 @@ a {
   flex-wrap: wrap;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .logo {
   font-size: 1.4rem;
   font-weight: 700;
@@ -1106,6 +1112,69 @@ body.theme-dark .carousel-dot {
 
   .slide-content h1 {
     font-size: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .top-bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo actions"
+      "search search"
+      "location location"
+      "login login";
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+
+  .search-wrap {
+    grid-area: search;
+  }
+
+  .header-actions {
+    grid-area: actions;
+  }
+
+  .location-btn {
+    grid-area: location;
+    font-size: 0.8rem;
+    padding: 8px 10px;
+    width: 100%;
+    text-align: left;
+  }
+
+  #loginButton {
+    grid-area: login;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    width: 100%;
+  }
+
+  .icon-btn {
+    padding: 8px;
+  }
+
+  .nav-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 6px 0 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    font-size: 0.9rem;
   }
 }
 
