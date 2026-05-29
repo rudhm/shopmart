@@ -39,7 +39,7 @@ const products = [
   {
     id: 4,
     name: "Hazelnut Wafer Bites",
-    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
+    imageUrl: "https://m.media-amazon.com/images/I/71Ts3zLD7+L._AC_UL320_.jpg",
     category: "Snacks",
     weight: "180g",
     price: 85,
@@ -51,7 +51,7 @@ const products = [
   {
     id: 5,
     name: "Dark Choco Wafer Sticks",
-    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
+    imageUrl: "https://m.media-amazon.com/images/I/41muoUYCsnL._AC_UL320_.jpg",
     category: "Snacks",
     weight: "120g",
     price: 65,
@@ -63,7 +63,7 @@ const products = [
   {
     id: 6,
     name: "Caramel Wafer Bars",
-    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
+    imageUrl: "https://m.media-amazon.com/images/I/71r7NSzJvSL._AC_UL320_.jpg",
     category: "Snacks",
     weight: "6 pack",
     price: 70,
@@ -75,7 +75,7 @@ const products = [
   {
     id: 7,
     name: "Coconut Wafer Cookies",
-    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
+    imageUrl: "https://m.media-amazon.com/images/I/61G+MZnvtbL._AC_UL320_.jpg",
     category: "Snacks",
     weight: "160g",
     price: 58,
@@ -87,7 +87,7 @@ const products = [
   {
     id: 8,
     name: "Almond Crunch Wafers",
-    imageUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=300&fit=crop&auto=format",
+    imageUrl: "https://m.media-amazon.com/images/I/71EsKPwvIEL._AC_UL320_.jpg",
     category: "Snacks",
     weight: "180g",
     price: 92,
@@ -99,6 +99,7 @@ const products = [
   {
     id: 9,
     name: "Lay's Classic Salted",
+    imageUrl: "https://m.media-amazon.com/images/I/81rrNUIq9FL._AC_UL320_.jpg",
     category: "Snacks",
     weight: "78g",
     price: 20,
@@ -110,6 +111,7 @@ const products = [
   {
     id: 10,
     name: "Haldiram's Bhujia",
+    imageUrl: "https://m.media-amazon.com/images/I/71ErNqU8prL._AC_UL320_.jpg",
     category: "Snacks",
     weight: "400g",
     price: 149,
@@ -120,8 +122,8 @@ const products = [
   },
   {
     id: 11,
-    name: "Oreo Biscuits",
-    imageUrl: "https://images.openfoodfacts.org/images/products/762/220/175/6697/front_en.3.400.jpg",
+    name: "Orea biscuits",
+    imageUrl: "https://m.media-amazon.com/images/I/61hEMqqoGxL._AC_UL320_.jpg",
     category: "Snacks",
     weight: "300g",
     price: 85,
@@ -133,6 +135,7 @@ const products = [
   {
     id: 12,
     name: "Too Yumm Multigrain",
+    imageUrl: "https://m.media-amazon.com/images/I/61k5oVIwLML._AC_UL320_.jpg",
     category: "Snacks",
     weight: "150g",
     price: 55,
@@ -144,7 +147,8 @@ const products = [
   {
     id: 13,
     name: "Tropicana Orange Juice",
-    category: "Water",
+    imageUrl: "https://m.media-amazon.com/images/I/71GKSeI9+HL._AC_UL320_.jpg",
+    category: "Beverages",
     weight: "1L",
     price: 99,
     originalPrice: 120,
@@ -155,7 +159,7 @@ const products = [
   {
     id: 14,
     name: "Red Bull Energy Drink",
-    imageUrl: "https://images.openfoodfacts.org/images/products/900/249/010/0759/front_en.18.400.jpg",
+    imageUrl: "https://m.media-amazon.com/images/I/71H2iEdBRfL._AC_UL320_.jpg",
     category: "Beverages",
     weight: "250ml",
     price: 115,
@@ -167,7 +171,8 @@ const products = [
   {
     id: 15,
     name: "Bisleri Water",
-    category: "Beverages",
+    imageUrl: "https://m.media-amazon.com/images/I/61AeDsKQjmL._AC_UL320_.jpg",
+    category: "Water",
     weight: "1L",
     price: 20,
     originalPrice: 20,
@@ -190,7 +195,7 @@ const products = [
   {
     id: 17,
     name: "Dove Soap",
-    imageUrl: "https://placehold.co/300x300/f0f4ff/555?text=Dove+Soap",
+    imageUrl: "https://m.media-amazon.com/images/I/51Xjh93u1jL._AC_UL320_.jpg",
     category: "Beauty & Cosmetics",
     weight: "100g",
     price: 55,
@@ -202,7 +207,7 @@ const products = [
   {
     id: 18,
     name: "Head & Shoulders",
-    imageUrl: "https://placehold.co/300x300/e8f0fe/555?text=Head+%26+Shoulders",
+    imageUrl: "https://m.media-amazon.com/images/I/71YqOlldxRL._AC_UL320_.jpg",
     category: "Beauty & Cosmetics",
     weight: "340ml",
     price: 299,
@@ -214,7 +219,7 @@ const products = [
   {
     id: 19,
     name: "Colgate MaxFresh",
-    imageUrl: "https://placehold.co/300x300/e8fff4/555?text=Colgate+MaxFresh",
+    imageUrl: "https://m.media-amazon.com/images/I/71nFBscCkvL._AC_UL320_.jpg",
     category: "Beauty & Cosmetics",
     weight: "150g",
     price: 89,
@@ -226,7 +231,7 @@ const products = [
   {
     id: 20,
     name: "Vaseline Body Lotion",
-    imageUrl: "https://placehold.co/300x300/fff8e8/555?text=Vaseline+Lotion",
+    imageUrl: "https://m.media-amazon.com/images/I/51VUOVQHL5L._AC_UL320_.jpg",
     category: "Beauty & Cosmetics",
     weight: "300ml",
     price: 199,
@@ -238,7 +243,7 @@ const products = [
   {
     id: 21,
     name: "Fortune Basmati Rice",
-    imageUrl: "https://loremflickr.com/300/300/basmati,rice",
+    imageUrl: "https://m.media-amazon.com/images/I/718jTNHNlCL._AC_UL320_.jpg",
     category: "Basics",
     weight: "5kg",
     price: 399,
@@ -250,6 +255,7 @@ const products = [
   {
     id: 22,
     name: "Tata Salt",
+    imageUrl: "https://m.media-amazon.com/images/I/614mm2hYHyL._AC_UL320_.jpg",
     category: "Basics",
     weight: "1kg",
     price: 24,
@@ -261,7 +267,7 @@ const products = [
   {
     id: 23,
     name: "Aashirvaad Atta",
-    imageUrl: "https://loremflickr.com/300/300/wheat,flour,atta",
+    imageUrl: "https://m.media-amazon.com/images/I/91Lj2AJXfOL._AC_UL320_.jpg",
     category: "Basics",
     weight: "5kg",
     price: 249,
@@ -273,7 +279,7 @@ const products = [
   {
     id: 24,
     name: "Saffola Gold Oil",
-    imageUrl: "https://loremflickr.com/300/300/sunflower,oil,bottle",
+    imageUrl: "https://m.media-amazon.com/images/I/71qTlx+7CzL._AC_UL320_.jpg",
     category: "Basics",
     weight: "1L",
     price: 189,
@@ -285,6 +291,7 @@ const products = [
   {
     id: 25,
     name: "Cadbury Silk",
+    imageUrl: "https://m.media-amazon.com/images/I/71+dc4WOlEL._AC_UL320_.jpg",
     category: "Chocolates",
     weight: "110g",
     price: 80,
@@ -296,6 +303,7 @@ const products = [
   {
     id: 26,
     name: "KitKat Classic",
+    imageUrl: "https://m.media-amazon.com/images/I/71BdjHFKjTL._AC_UL320_.jpg",
     category: "Chocolates",
     weight: "45g",
     price: 25,
@@ -307,6 +315,7 @@ const products = [
   {
     id: 27,
     name: "Ferrero Rocher",
+    imageUrl: "https://m.media-amazon.com/images/I/617c5JwVjQL._AC_UL320_.jpg",
     category: "Chocolates",
     weight: "200g",
     price: 450,
@@ -318,7 +327,7 @@ const products = [
   {
     id: 28,
     name: "MDH Garam Masala",
-    imageUrl: "https://images.openfoodfacts.org/images/products/629/110/375/0167/front_en.5.400.jpg",
+    imageUrl: "https://m.media-amazon.com/images/I/61MyqJ4PkEL._AC_UL320_.jpg",
     category: "Spices",
     weight: "100g",
     price: 65,
@@ -330,7 +339,7 @@ const products = [
   {
     id: 29,
     name: "Everest Chilli Powder",
-    imageUrl: "https://images.openfoodfacts.org/images/products/890/178/639/0151/front_en.4.400.jpg",
+    imageUrl: "https://m.media-amazon.com/images/I/81HPTcGyDdL._AC_UL320_.jpg",
     category: "Spices",
     weight: "100g",
     price: 58,
@@ -342,6 +351,7 @@ const products = [
   {
     id: 30,
     name: "Tata Sampann Turmeric",
+    imageUrl: "https://m.media-amazon.com/images/I/61c+jv2PrNL._AC_UL320_.jpg",
     category: "Spices",
     weight: "200g",
     price: 72,
@@ -353,7 +363,7 @@ const products = [
   {
     id: 31,
     name: "Surf Excel Detergent",
-    imageUrl: "https://placehold.co/300x300/e8f4ff/555?text=Surf+Excel",
+    imageUrl: "https://m.media-amazon.com/images/I/61akecKSiLL._AC_UL320_.jpg",
     category: "Household Essentials",
     weight: "2kg",
     price: 299,
@@ -365,7 +375,7 @@ const products = [
   {
     id: 32,
     name: "Vim Dishwash Gel",
-    imageUrl: "https://placehold.co/300x300/f0ffe8/555?text=Vim+Dishwash",
+    imageUrl: "https://m.media-amazon.com/images/I/51A8+b9ZgHL._AC_UL320_.jpg",
     category: "Household Essentials",
     weight: "500ml",
     price: 109,
@@ -377,7 +387,7 @@ const products = [
   {
     id: 33,
     name: "Harpic Toilet Cleaner",
-    imageUrl: "https://placehold.co/300x300/fff0f0/555?text=Harpic",
+    imageUrl: "https://m.media-amazon.com/images/I/61j+zu68oTL._AC_UL320_.jpg",
     category: "Household Essentials",
     weight: "1L",
     price: 189,
@@ -389,7 +399,7 @@ const products = [
   {
     id: 34,
     name: "Vimal Classic Gutkha",
-    imageUrl: "https://placehold.co/300x300/f7f7f7/555?text=Vimal+Gutkha",
+    imageUrl: "https://storage.googleapis.com/shy-pub/309224/images-1722344344632.jpeg",
     category: "Gutkha",
     weight: "10 sachets",
     price: 45,
@@ -401,7 +411,7 @@ const products = [
   {
     id: 35,
     name: "Rajnigandha Pearls",
-    imageUrl: "https://placehold.co/300x300/f2f2f2/555?text=Rajnigandha",
+    imageUrl: "https://m.media-amazon.com/images/I/61dQgILttqL._AC_UL320_.jpg",
     category: "Gutkha",
     weight: "6 sachets",
     price: 60,
@@ -411,21 +421,9 @@ const products = [
     reviews: "980",
   },
   {
-    id: 36,
-    name: "Manikchand Silver",
-    imageUrl: "https://placehold.co/300x300/f5f5f5/555?text=Manikchand",
-    category: "Gutkha",
-    weight: "10 sachets",
-    price: 50,
-    originalPrice: 60,
-    discount: 17,
-    rating: 4.1,
-    reviews: "860",
-  },
-  {
     id: 37,
     name: "Baba Elaichi Mix",
-    imageUrl: "https://placehold.co/300x300/f4f4f4/555?text=Baba+Elaichi",
+    imageUrl: "https://m.media-amazon.com/images/I/71-Q3JmTexL._AC_UL320_.jpg",
     category: "Gutkha",
     weight: "8 sachets",
     price: 40,
@@ -437,7 +435,7 @@ const products = [
   {
     id: 38,
     name: "Aquafina Water",
-    imageUrl: "https://placehold.co/300x300/e8f6ff/555?text=Aquafina",
+    imageUrl: "https://m.media-amazon.com/images/I/81Th2waxaCL._AC_UL320_.jpg",
     category: "Water",
     weight: "1L",
     price: 22,
@@ -449,7 +447,7 @@ const products = [
   {
     id: 39,
     name: "Kinley Water",
-    imageUrl: "https://placehold.co/300x300/e3f3ff/555?text=Kinley",
+    imageUrl: "https://m.media-amazon.com/images/I/51IzSgO0vJL._AC_UL320_.jpg",
     category: "Water",
     weight: "1L",
     price: 20,
@@ -461,7 +459,7 @@ const products = [
   {
     id: 40,
     name: "Himalayan Natural Water",
-    imageUrl: "https://placehold.co/300x300/e6f5ff/555?text=Himalayan",
+    imageUrl: "https://m.media-amazon.com/images/I/51nBbDPmSuL._AC_UL320_.jpg",
     category: "Water",
     weight: "1L",
     price: 70,
@@ -471,33 +469,9 @@ const products = [
     reviews: "1.8k",
   },
   {
-    id: 41,
-    name: "Rail Neer Pack",
-    imageUrl: "https://placehold.co/300x300/eaf7ff/555?text=Rail+Neer",
-    category: "Water",
-    weight: "1L",
-    price: 15,
-    originalPrice: 15,
-    discount: 0,
-    rating: 4.3,
-    reviews: "2.6k",
-  },
-  {
-    id: 42,
-    name: "Bailley Water",
-    imageUrl: "https://placehold.co/300x300/e8f6ff/555?text=Bailley",
-    category: "Water",
-    weight: "500ml",
-    price: 12,
-    originalPrice: 12,
-    discount: 0,
-    rating: 4.4,
-    reviews: "3.1k",
-  },
-  {
     id: 43,
     name: "Vedica Himalayan Water",
-    imageUrl: "https://placehold.co/300x300/e6f4ff/555?text=Vedica",
+    imageUrl: "https://m.media-amazon.com/images/I/51uy1OK1vpL._AC_UL320_.jpg",
     category: "Water",
     weight: "1L",
     price: 65,
@@ -509,7 +483,7 @@ const products = [
   {
     id: 44,
     name: "Bisleri Water Jar",
-    imageUrl: "https://placehold.co/300x300/e7f6ff/555?text=Bisleri+Jar",
+    imageUrl: "https://m.media-amazon.com/images/I/51SZnVrmKQL._AC_UL320_.jpg",
     category: "Water",
     weight: "20L",
     price: 90,
