@@ -370,6 +370,10 @@ button:disabled {
   box-shadow: var(--shadow);
 }
 
+.promo-main.promo-water {
+  background: linear-gradient(120deg, #0ea5e9, #2563eb);
+}
+
 .promo-row {
   margin-top: 16px;
   display: grid;

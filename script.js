@@ -943,6 +943,7 @@ const elements = {
   priceMax: document.getElementById("priceMax"),
   newOnlyToggle: document.getElementById("newOnlyToggle"),
   clearFilters: document.getElementById("clearFilters"),
+  waterPromoCta: document.getElementById("waterPromoCta"),
 };
 
 let toastTimer;
@@ -1787,6 +1788,20 @@ elements.categoryTabs.addEventListener("click", (event) => {
   if (!tab) return;
   setActiveCategory(tab.dataset.category);
 });
+
+if (elements.waterPromoCta) {
+  elements.waterPromoCta.addEventListener("click", () => {
+    state.searchTerm = "";
+    if (elements.searchInput) elements.searchInput.value = "";
+
+    state.priceMin = null;
+    state.priceMax = null;
+    state.newOnly = false;
+    syncProductControls();
+
+    setActiveCategory("Water");
+  });
+}
 
 elements.productGrid.addEventListener("click", (event) => {
   const qtyButton = event.target.closest(".qty-stepper .qty-btn");
