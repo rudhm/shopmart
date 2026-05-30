@@ -397,18 +397,6 @@ const products = [
     reviews: "4.1k",
   },
   {
-    id: 34,
-    name: "Vimal Classic Mouth Freshener",
-    imageUrl: "https://storage.googleapis.com/shy-pub/309224/images-1722344344632.jpeg",
-    category: "Mouth Fresheners & Mints",
-    weight: "10 sachets",
-    price: 45,
-    originalPrice: 55,
-    discount: 18,
-    rating: 4.2,
-    reviews: "1.2k",
-  },
-  {
     id: 35,
     name: "Rajnigandha Silver Pearls",
     imageUrl: "https://m.media-amazon.com/images/I/61dQgILttqL._AC_UL320_.jpg",
@@ -546,6 +534,7 @@ const products = [
   {
     id: 49,
     name: "Vimal Pan Masala",
+    imageUrl: "https://storage.googleapis.com/shy-pub/309224/images-1722344344632.jpeg",
     category: "Pan Masala & Chewing Tobacco",
     weight: "1 sachet",
     price: 10,
