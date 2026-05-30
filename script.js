@@ -400,7 +400,7 @@ const products = [
     id: 34,
     name: "Vimal Classic Mouth Freshener",
     imageUrl: "https://storage.googleapis.com/shy-pub/309224/images-1722344344632.jpeg",
-    category: "Mouth Freshener",
+    category: "Mouth Fresheners & Mints",
     weight: "10 sachets",
     price: 45,
     originalPrice: 55,
@@ -410,9 +410,9 @@ const products = [
   },
   {
     id: 35,
-    name: "Rajnigandha Pearls",
+    name: "Rajnigandha Silver Pearls",
     imageUrl: "https://m.media-amazon.com/images/I/61dQgILttqL._AC_UL320_.jpg",
-    category: "Mouth Freshener",
+    category: "Mouth Fresheners & Mints",
     weight: "6 sachets",
     price: 60,
     originalPrice: 72,
@@ -424,7 +424,7 @@ const products = [
     id: 37,
     name: "Baba Elaichi Mix",
     imageUrl: "https://m.media-amazon.com/images/I/71-Q3JmTexL._AC_UL320_.jpg",
-    category: "Mouth Freshener",
+    category: "Mouth Fresheners & Mints",
     weight: "8 sachets",
     price: 40,
     originalPrice: 50,
@@ -492,6 +492,145 @@ const products = [
     rating: 4.6,
     reviews: "2.9k",
   },
+  {
+    id: 45,
+    name: "Chhoti Gold Flake",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvgeR3tseYqOnkidAv65E5MkMiUBdtRQdjNg&s",
+    category: "Cigarettes & Smoking Accessories",
+    weight: "10 sticks",
+    price: 120,
+    originalPrice: 130,
+    discount: 8,
+    rating: 4.2,
+    reviews: "1.6k",
+  },
+  {
+    id: 46,
+    name: "Gold Flake Kings",
+    imageUrl: "https://driftbasket.com/wp-content/uploads/2024/05/IND_MUM_H1_015_4.jpg",
+    category: "Cigarettes & Smoking Accessories",
+    weight: "20 sticks",
+    price: 220,
+    originalPrice: 240,
+    discount: 8,
+    rating: 4.3,
+    reviews: "2.1k",
+  },
+  {
+    id: 47,
+    name: "Classic Milds",
+    imageUrl:
+      "https://www.topintownstore.com/wp-content/uploads/2024/11/wills-classic-mild-10-sticks.webp",
+    category: "Cigarettes & Smoking Accessories",
+    weight: "10 sticks",
+    price: 160,
+    originalPrice: 175,
+    discount: 9,
+    rating: 4.1,
+    reviews: "980",
+  },
+  {
+    id: 48,
+    name: "502 Pataka Bidi",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEB3QKHshtHc4PtQMhc_mSXLCxcpytB-W2_Q&s",
+    category: "Cigarettes & Smoking Accessories",
+    weight: "25 bidis",
+    price: 70,
+    originalPrice: 80,
+    discount: 12,
+    rating: 3.9,
+    reviews: "740",
+  },
+  {
+    id: 49,
+    name: "Vimal Pan Masala",
+    category: "Pan Masala & Chewing Tobacco",
+    weight: "1 sachet",
+    price: 10,
+    originalPrice: 12,
+    discount: 17,
+    rating: 4.0,
+    reviews: "5.4k",
+  },
+  {
+    id: 50,
+    name: "Rajnigandha Pan Masala",
+    imageUrl:
+      "https://www.gutkhausa.com/cdn/shop/files/GUTKHAUSA.COM3.32.01PM.jpg?v=1769808763&width=800",
+    category: "Pan Masala & Chewing Tobacco",
+    weight: "1 pack",
+    price: 15,
+    originalPrice: 18,
+    discount: 17,
+    rating: 4.3,
+    reviews: "3.1k",
+  },
+  {
+    id: 51,
+    name: "Shikhar Pan Masala",
+    imageUrl:
+      "https://storage.googleapis.com/shy-pub/309224/1618655239762-6bfea08b-6445-4de9-9d74-73562a3b22e9-1742222421205.webp",
+    category: "Pan Masala & Chewing Tobacco",
+    weight: "1 pack",
+    price: 12,
+    originalPrice: 15,
+    discount: 20,
+    rating: 4.1,
+    reviews: "1.7k",
+  },
+  {
+    id: 52,
+    name: "Chaini Khaini",
+    imageUrl:
+      "https://www.gutkhausa.com/cdn/shop/files/2_59d5ccb4-39b7-4103-ad68-a5b0d0377783.jpg?v=1769826668",
+    category: "Pan Masala & Chewing Tobacco",
+    weight: "1 pack",
+    price: 20,
+    originalPrice: 24,
+    discount: 17,
+    rating: 4.0,
+    reviews: "2.2k",
+  },
+  {
+    id: 53,
+    name: "Center Fresh",
+    imageUrl:
+      "https://5.imimg.com/data5/SELLER/Default/2023/12/367840845/WX/CI/UM/48068505/630g-center-fresh-chewing-gum-500x500.jpg",
+    category: "Mouth Fresheners & Mints",
+    weight: "100 pcs",
+    price: 140,
+    originalPrice: 160,
+    discount: 13,
+    rating: 4.4,
+    reviews: "8.9k",
+  },
+  {
+    id: 54,
+    name: "Pass Pass",
+    imageUrl: "https://storage.googleapis.com/shy-pub/285171/1686939153824_SKU-0486_0.png",
+    category: "Mouth Fresheners & Mints",
+    weight: "10 sachets",
+    price: 50,
+    originalPrice: 60,
+    discount: 17,
+    rating: 4.2,
+    reviews: "1.3k",
+  },
+  {
+    id: 55,
+    name: "Happydent",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdetUzd5yer17IsraCZtG0_ZkQWu4zl_lVkA&s",
+    category: "Mouth Fresheners & Mints",
+    weight: "1 pack",
+    price: 35,
+    originalPrice: 40,
+    discount: 12,
+    rating: 4.3,
+    reviews: "6.2k",
+  },
 ];
 
 // Category metadata for the grid and tabs
@@ -499,7 +638,9 @@ const categoryMeta = [
   { label: "Beauty & Cosmetics", emoji: "💄" },
   { label: "Chocolates", emoji: "🍫" },
   { label: "Snacks", emoji: "🍿" },
-  { label: "Mouth Freshener", emoji: "🌿" },
+  { label: "Mouth Fresheners & Mints", emoji: "🍬" },
+  { label: "Pan Masala & Chewing Tobacco", emoji: "🫙" },
+  { label: "Cigarettes & Smoking Accessories", emoji: "🚬" },
   { label: "Beverages", emoji: "🥤" },
   { label: "Water", emoji: "💧" },
   { label: "Spices", emoji: "🌶️" },
@@ -582,6 +723,28 @@ let releaseFocusTrap = null;
 const formatPrice = (value) => `₹${value}`;
 
 const getScrollBehavior = () => (motionQuery.matches ? "auto" : "smooth");
+
+const setViewportHeightVar = () => {
+  try {
+    const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    document.documentElement.style.setProperty("--viewport-height", `${Math.round(height)}px`);
+  } catch {
+    // no-op
+  }
+};
+
+const ensureDialogFieldVisible = (target) => {
+  if (!activeDialog || !target || !activeDialog.contains(target)) return;
+  if (!target.matches?.("input, textarea, select")) return;
+  setTimeout(() => {
+    try {
+      setViewportHeightVar();
+      target.scrollIntoView({ block: "center", inline: "nearest" });
+    } catch {
+      // no-op
+    }
+  }, 50);
+};
 
 const getProductImage = (name) =>
   `https://placehold.co/300x300/f5f5f5/555?text=${encodeURIComponent(name)}`;
@@ -1068,6 +1231,7 @@ const renderCart = () => {
                   class="qty-btn"
                   data-action="decrease"
                   data-id="${id}"
+                  type="button"
                   aria-label="Decrease ${product.name} quantity"
                 >
                   −
@@ -1077,6 +1241,7 @@ const renderCart = () => {
                   class="qty-btn"
                   data-action="increase"
                   data-id="${id}"
+                  type="button"
                   aria-label="Increase ${product.name} quantity"
                 >
                   +
@@ -1089,6 +1254,7 @@ const renderCart = () => {
                 class="remove-btn"
                 data-action="remove"
                 data-id="${id}"
+                type="button"
                 aria-label="Remove ${product.name}"
               >
                 ×
@@ -1420,8 +1586,19 @@ elements.loginButton.addEventListener("click", () => {
 });
 elements.closeAccountModal.addEventListener("click", () => closeDialog(elements.accountModal));
 elements.accountSubmit.addEventListener("click", () => {
-  showToast("Logged in (demo).");
-  closeDialog(elements.accountModal);
+  if (elements.accountSubmit.disabled) return;
+  const originalText = elements.accountSubmit.textContent;
+  elements.accountSubmit.disabled = true;
+  elements.accountSubmit.textContent = "Signing in…";
+  elements.accountModal.setAttribute("aria-busy", "true");
+
+  setTimeout(() => {
+    showToast("Logged in (demo).");
+    closeDialog(elements.accountModal);
+    elements.accountSubmit.disabled = false;
+    elements.accountSubmit.textContent = originalText;
+    elements.accountModal.removeAttribute("aria-busy");
+  }, 600);
 });
 
 elements.themeToggle.addEventListener("click", () => {
@@ -1464,9 +1641,31 @@ elements.checkoutButton.addEventListener("click", () => {
 
 document.getElementById("newsletterForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = e.target.querySelector("input").value;
-  showToast(`✓ Subscribed ${email} to our newsletter!`);
-  e.target.reset();
+  const form = e.currentTarget;
+  const input = form.querySelector('input[type="email"]');
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (!input || !submitButton || submitButton.disabled) return;
+
+  const email = input.value.trim();
+  if (!email) {
+    input.focus();
+    return;
+  }
+
+  const originalText = submitButton.textContent;
+  submitButton.disabled = true;
+  input.disabled = true;
+  form.setAttribute("aria-busy", "true");
+  submitButton.textContent = "Subscribing…";
+
+  setTimeout(() => {
+    showToast(`✓ Subscribed ${email} to our newsletter!`);
+    form.reset();
+    input.disabled = false;
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+    form.removeAttribute("aria-busy");
+  }, 700);
 });
 
 elements.backToTop.addEventListener("click", () => {
@@ -1499,6 +1698,16 @@ elements.carousel.addEventListener("mouseleave", startCarousel);
 elements.carousel.addEventListener("focusin", stopCarousel);
 elements.carousel.addEventListener("focusout", startCarousel);
 
+document.addEventListener("focusin", (event) => {
+  ensureDialogFieldVisible(event.target);
+});
+
+setViewportHeightVar();
+window.addEventListener("resize", setViewportHeightVar);
+if (window.visualViewport && typeof window.visualViewport.addEventListener === "function") {
+  window.visualViewport.addEventListener("resize", setViewportHeightVar);
+}
+
 if (typeof motionQuery.addEventListener === "function") {
   motionQuery.addEventListener("change", handleMotionPreference);
 } else if (typeof motionQuery.addListener === "function") {
@@ -1512,4 +1721,7 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("scroll", handleScroll);
-window.addEventListener("load", init);
+window.addEventListener("load", () => {
+  setViewportHeightVar();
+  init();
+});
