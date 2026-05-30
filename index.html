@@ -161,19 +161,68 @@
       <!-- Product Listing -->
       <section class="products container" id="productsSection">
         <div class="products-header">
-          <div>
+          <div class="products-intro">
             <h2>
               Best Sellers
               <span class="count" id="productCount">(24 products)</span>
             </h2>
             <p>Handpicked favorites loved by our shoppers.</p>
           </div>
-          <div
-            class="filter-tabs"
-            id="categoryTabs"
-            role="tablist"
-            aria-label="Product categories"
-          ></div>
+          <div class="products-tools">
+            <div class="products-controls" aria-label="Product controls">
+              <label class="control-field">
+                <span class="control-label">Sort</span>
+                <select id="sortSelect" class="control-select" aria-label="Sort products">
+                  <option value="featured" selected>Featured</option>
+                  <option value="new">New arrivals</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating-desc">Rating</option>
+                  <option value="discount-desc">Discount</option>
+                </select>
+              </label>
+
+              <label class="control-field">
+                <span class="control-label">Price (₹)</span>
+                <span class="price-range" role="group" aria-label="Price range">
+                  <input
+                    id="priceMin"
+                    class="control-input"
+                    type="number"
+                    min="0"
+                    inputmode="numeric"
+                    placeholder="Min"
+                    aria-label="Minimum price"
+                  />
+                  <span class="range-sep" aria-hidden="true">–</span>
+                  <input
+                    id="priceMax"
+                    class="control-input"
+                    type="number"
+                    min="0"
+                    inputmode="numeric"
+                    placeholder="Max"
+                    aria-label="Maximum price"
+                  />
+                </span>
+              </label>
+
+              <label class="new-only" for="newOnlyToggle" aria-label="Show new products only">
+                <input id="newOnlyToggle" type="checkbox" />
+                <span>New only</span>
+              </label>
+
+              <button class="btn-outline control-reset" id="clearFilters" type="button">
+                Reset
+              </button>
+            </div>
+            <div
+              class="filter-tabs"
+              id="categoryTabs"
+              role="tablist"
+              aria-label="Product categories"
+            ></div>
+          </div>
         </div>
         <div class="product-grid" id="productGrid"></div>
       </section>

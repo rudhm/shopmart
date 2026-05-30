@@ -393,9 +393,85 @@ button:disabled {
   align-items: flex-start;
 }
 
+.products-intro {
+  flex: 1;
+}
+
 .products-header p {
   margin: 6px 0 0;
   color: var(--muted);
+}
+
+.products-tools {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.products-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+}
+
+.control-field {
+  display: grid;
+  gap: 6px;
+}
+
+.control-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.control-select,
+.control-input {
+  border: 1px solid #ddd;
+  background: var(--light-gray);
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: var(--text);
+}
+
+.control-input {
+  width: 96px;
+}
+
+.price-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.range-sep {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.new-only {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: var(--white);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.new-only input {
+  width: 18px;
+  height: 18px;
+}
+
+.control-reset {
+  padding: 10px 14px;
 }
 
 .count {
@@ -470,6 +546,18 @@ button:disabled {
   border-radius: 999px;
   font-size: 0.7rem;
   font-weight: 600;
+}
+
+.new-badge {
+  background: rgba(255, 107, 53, 0.12);
+  color: var(--primary);
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .wishlist-btn {
@@ -1087,6 +1175,11 @@ body.theme-dark .carousel-dot {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .products-tools {
+    width: auto;
+    align-items: flex-end;
   }
 
   .product-grid {

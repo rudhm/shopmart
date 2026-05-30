@@ -886,6 +886,10 @@ const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const state = {
   activeCategory: "All",
   searchTerm: "",
+  sort: "featured",
+  priceMin: null,
+  priceMax: null,
+  newOnly: false,
   cart: new Map(),
   wishlist: new Set(),
   theme: "light",
@@ -934,6 +938,11 @@ const elements = {
   quickViewQty: document.getElementById("quickViewQty"),
   quickViewAdd: document.getElementById("quickViewAdd"),
   themeToggle: document.getElementById("themeToggle"),
+  sortSelect: document.getElementById("sortSelect"),
+  priceMin: document.getElementById("priceMin"),
+  priceMax: document.getElementById("priceMax"),
+  newOnlyToggle: document.getElementById("newOnlyToggle"),
+  clearFilters: document.getElementById("clearFilters"),
 };
 
 let toastTimer;
@@ -1288,6 +1297,14 @@ const renderCategoryTabs = () => {
     .join("");
 };
 
+const parsePriceFilterValue = (value) => {
+  const trimmed = String(value ?? "").trim();
+  if (!trimmed) return null;
+  const parsed = Number(trimmed);
+  if (!Number.isFinite(parsed) || parsed < 0) return null;
+  return parsed;
+};
+
 const getFilteredProducts = () => {
   const searchTerm = state.searchTerm.toLowerCase();
   return products.filter((product) => {
@@ -1297,23 +1314,63 @@ const getFilteredProducts = () => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchTerm) ||
       product.category.toLowerCase().includes(searchTerm);
-    return matchesCategory && matchesSearch;
+    const matchesNew = !state.newOnly || product.tag === "New";
+    const matchesMinPrice = state.priceMin == null || product.price >= state.priceMin;
+    const matchesMaxPrice = state.priceMax == null || product.price <= state.priceMax;
+    return matchesCategory && matchesSearch && matchesNew && matchesMinPrice && matchesMaxPrice;
   });
 };
 
+const sortProducts = (items) => {
+  const sorted = [...items];
+  switch (state.sort) {
+    case "price-asc":
+      sorted.sort((a, b) => (a.price || 0) - (b.price || 0));
+      break;
+    case "price-desc":
+      sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
+      break;
+    case "rating-desc":
+      sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      break;
+    case "discount-desc":
+      sorted.sort((a, b) => (b.discount || 0) - (a.discount || 0));
+      break;
+    case "new":
+      sorted.sort((a, b) => {
+        const aIsNew = a.tag === "New";
+        const bIsNew = b.tag === "New";
+        if (aIsNew !== bIsNew) return aIsNew ? -1 : 1;
+        return (b.id || 0) - (a.id || 0);
+      });
+      break;
+    default:
+      break;
+  }
+  return sorted;
+};
+
 const renderProducts = () => {
-  const filtered = getFilteredProducts();
+  const filtered = sortProducts(getFilteredProducts());
   elements.productCount.textContent = `(${filtered.length} products)`;
 
   if (filtered.length === 0) {
+    const hasAnyFilter =
+      Boolean(state.searchTerm) ||
+      state.activeCategory !== "All" ||
+      state.newOnly ||
+      state.priceMin != null ||
+      state.priceMax != null;
+
     const emptyMessage = state.searchTerm
       ? `No products found for "${state.searchTerm}".`
       : state.activeCategory === "All"
       ? "No products found right now."
       : `No products available in ${state.activeCategory} yet.`;
+
     elements.productGrid.innerHTML = `
       <div class="empty-state">
-        ${emptyMessage} Try another category or search term.
+        ${emptyMessage} ${hasAnyFilter ? "Try resetting filters." : "Try another category or search term."}
       </div>
     `;
     return;
@@ -1322,16 +1379,24 @@ const renderProducts = () => {
   elements.productGrid.innerHTML = filtered
     .map((product) => {
       const deliveryEligible = product.price > 99;
-      const discountClass = product.discount === 0 ? "neutral" : "";
+      const showDiscount = product.discount > 0;
+      const discountClass = showDiscount ? "" : "neutral";
       const isWishlisted = state.wishlist.has(product.id);
       const productImage = product.imageUrl || getProductImage(product.name);
       const wishlistLabel = isWishlisted
         ? `Remove ${product.name} from wishlist`
         : `Add ${product.name} to wishlist`;
+
+      const tagBadge = product.tag ? `<span class="new-badge">${product.tag}</span>` : "";
+      const discountBadge = showDiscount
+        ? `<span class="discount-badge ${discountClass}">${product.discount}% OFF</span>`
+        : "";
+
       return `
         <div class="product-card">
           <div class="product-badges">
-            <span class="discount-badge ${discountClass}">${product.discount}% OFF</span>
+            ${tagBadge}
+            ${discountBadge}
             ${
               deliveryEligible
                 ? '<span class="delivery-badge">FREE Delivery</span>'
@@ -1367,9 +1432,7 @@ const renderProducts = () => {
             <span class="price">${formatPrice(product.price)}</span>
             <span class="mrp">${formatPrice(product.originalPrice)}</span>
           </div>
-          <div class="rating">⭐ ${product.rating} · ${
-        product.reviews
-      } reviews</div>
+          <div class="rating">⭐ ${product.rating} · ${product.reviews} reviews</div>
           <div class="product-actions">
             <div class="qty-stepper" data-id="${product.id}">
               <button
@@ -1707,6 +1770,7 @@ const init = () => {
   updateCartBadge();
   updateWishlistBadge();
   renderCarouselDots();
+  syncProductControls();
   handleMotionPreference();
   handleScroll();
 };
@@ -1857,6 +1921,78 @@ const handleSearchInput = debounce((value) => {
 elements.searchInput.addEventListener("input", (event) => {
   handleSearchInput(event.target.value.trim());
 });
+
+const syncProductControls = () => {
+  if (elements.sortSelect) {
+    elements.sortSelect.value = state.sort;
+  }
+  if (elements.priceMin) {
+    elements.priceMin.value = state.priceMin == null ? "" : String(state.priceMin);
+  }
+  if (elements.priceMax) {
+    elements.priceMax.value = state.priceMax == null ? "" : String(state.priceMax);
+  }
+  if (elements.newOnlyToggle) {
+    elements.newOnlyToggle.checked = Boolean(state.newOnly);
+  }
+};
+
+const resetProductFilters = () => {
+  state.searchTerm = "";
+  if (elements.searchInput) elements.searchInput.value = "";
+
+  state.sort = "featured";
+  state.priceMin = null;
+  state.priceMax = null;
+  state.newOnly = false;
+
+  syncProductControls();
+  setActiveCategory("All");
+};
+
+const applyPriceFilters = debounce(() => {
+  state.priceMin = parsePriceFilterValue(elements.priceMin ? elements.priceMin.value : "");
+  state.priceMax = parsePriceFilterValue(elements.priceMax ? elements.priceMax.value : "");
+
+  if (state.priceMin != null && state.priceMax != null && state.priceMax < state.priceMin) {
+    const swap = state.priceMin;
+    state.priceMin = state.priceMax;
+    state.priceMax = swap;
+    syncProductControls();
+  }
+
+  renderProducts();
+}, 200);
+
+if (elements.sortSelect) {
+  elements.sortSelect.addEventListener("change", (event) => {
+    state.sort = event.target.value || "featured";
+    renderProducts();
+  });
+}
+
+if (elements.priceMin) {
+  elements.priceMin.addEventListener("input", () => {
+    applyPriceFilters();
+  });
+}
+
+if (elements.priceMax) {
+  elements.priceMax.addEventListener("input", () => {
+    applyPriceFilters();
+  });
+}
+
+if (elements.newOnlyToggle) {
+  elements.newOnlyToggle.addEventListener("change", (event) => {
+    state.newOnly = Boolean(event.target.checked);
+    renderProducts();
+  });
+}
+
+if (elements.clearFilters) {
+  elements.clearFilters.addEventListener("click", resetProductFilters);
+}
 
 elements.checkoutButton.addEventListener("click", () => {
   alert("Checkout is a demo flow. Thanks for shopping!");
