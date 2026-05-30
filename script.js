@@ -583,6 +583,28 @@ const formatPrice = (value) => `₹${value}`;
 
 const getScrollBehavior = () => (motionQuery.matches ? "auto" : "smooth");
 
+const setViewportHeightVar = () => {
+  try {
+    const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    document.documentElement.style.setProperty("--viewport-height", `${Math.round(height)}px`);
+  } catch {
+    // no-op
+  }
+};
+
+const ensureDialogFieldVisible = (target) => {
+  if (!activeDialog || !target || !activeDialog.contains(target)) return;
+  if (!target.matches?.("input, textarea, select")) return;
+  setTimeout(() => {
+    try {
+      setViewportHeightVar();
+      target.scrollIntoView({ block: "center", inline: "nearest" });
+    } catch {
+      // no-op
+    }
+  }, 50);
+};
+
 const getProductImage = (name) =>
   `https://placehold.co/300x300/f5f5f5/555?text=${encodeURIComponent(name)}`;
 
@@ -1068,6 +1090,7 @@ const renderCart = () => {
                   class="qty-btn"
                   data-action="decrease"
                   data-id="${id}"
+                  type="button"
                   aria-label="Decrease ${product.name} quantity"
                 >
                   −
@@ -1077,6 +1100,7 @@ const renderCart = () => {
                   class="qty-btn"
                   data-action="increase"
                   data-id="${id}"
+                  type="button"
                   aria-label="Increase ${product.name} quantity"
                 >
                   +
@@ -1089,6 +1113,7 @@ const renderCart = () => {
                 class="remove-btn"
                 data-action="remove"
                 data-id="${id}"
+                type="button"
                 aria-label="Remove ${product.name}"
               >
                 ×
@@ -1420,8 +1445,19 @@ elements.loginButton.addEventListener("click", () => {
 });
 elements.closeAccountModal.addEventListener("click", () => closeDialog(elements.accountModal));
 elements.accountSubmit.addEventListener("click", () => {
-  showToast("Logged in (demo).");
-  closeDialog(elements.accountModal);
+  if (elements.accountSubmit.disabled) return;
+  const originalText = elements.accountSubmit.textContent;
+  elements.accountSubmit.disabled = true;
+  elements.accountSubmit.textContent = "Signing in…";
+  elements.accountModal.setAttribute("aria-busy", "true");
+
+  setTimeout(() => {
+    showToast("Logged in (demo).");
+    closeDialog(elements.accountModal);
+    elements.accountSubmit.disabled = false;
+    elements.accountSubmit.textContent = originalText;
+    elements.accountModal.removeAttribute("aria-busy");
+  }, 600);
 });
 
 elements.themeToggle.addEventListener("click", () => {
@@ -1464,9 +1500,31 @@ elements.checkoutButton.addEventListener("click", () => {
 
 document.getElementById("newsletterForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = e.target.querySelector("input").value;
-  showToast(`✓ Subscribed ${email} to our newsletter!`);
-  e.target.reset();
+  const form = e.currentTarget;
+  const input = form.querySelector('input[type="email"]');
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (!input || !submitButton || submitButton.disabled) return;
+
+  const email = input.value.trim();
+  if (!email) {
+    input.focus();
+    return;
+  }
+
+  const originalText = submitButton.textContent;
+  submitButton.disabled = true;
+  input.disabled = true;
+  form.setAttribute("aria-busy", "true");
+  submitButton.textContent = "Subscribing…";
+
+  setTimeout(() => {
+    showToast(`✓ Subscribed ${email} to our newsletter!`);
+    form.reset();
+    input.disabled = false;
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+    form.removeAttribute("aria-busy");
+  }, 700);
 });
 
 elements.backToTop.addEventListener("click", () => {
@@ -1499,6 +1557,16 @@ elements.carousel.addEventListener("mouseleave", startCarousel);
 elements.carousel.addEventListener("focusin", stopCarousel);
 elements.carousel.addEventListener("focusout", startCarousel);
 
+document.addEventListener("focusin", (event) => {
+  ensureDialogFieldVisible(event.target);
+});
+
+setViewportHeightVar();
+window.addEventListener("resize", setViewportHeightVar);
+if (window.visualViewport && typeof window.visualViewport.addEventListener === "function") {
+  window.visualViewport.addEventListener("resize", setViewportHeightVar);
+}
+
 if (typeof motionQuery.addEventListener === "function") {
   motionQuery.addEventListener("change", handleMotionPreference);
 } else if (typeof motionQuery.addListener === "function") {
@@ -1512,4 +1580,7 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("scroll", handleScroll);
-window.addEventListener("load", init);
+window.addEventListener("load", () => {
+  setViewportHeightVar();
+  init();
+});
