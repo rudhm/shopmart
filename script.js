@@ -398,9 +398,9 @@ const products = [
   },
   {
     id: 34,
-    name: "Vimal Classic Gutkha",
+    name: "Vimal Classic Mouth Freshener",
     imageUrl: "https://storage.googleapis.com/shy-pub/309224/images-1722344344632.jpeg",
-    category: "Gutkha",
+    category: "Mouth Freshener",
     weight: "10 sachets",
     price: 45,
     originalPrice: 55,
@@ -412,7 +412,7 @@ const products = [
     id: 35,
     name: "Rajnigandha Pearls",
     imageUrl: "https://m.media-amazon.com/images/I/61dQgILttqL._AC_UL320_.jpg",
-    category: "Gutkha",
+    category: "Mouth Freshener",
     weight: "6 sachets",
     price: 60,
     originalPrice: 72,
@@ -424,7 +424,7 @@ const products = [
     id: 37,
     name: "Baba Elaichi Mix",
     imageUrl: "https://m.media-amazon.com/images/I/71-Q3JmTexL._AC_UL320_.jpg",
-    category: "Gutkha",
+    category: "Mouth Freshener",
     weight: "8 sachets",
     price: 40,
     originalPrice: 50,
@@ -499,7 +499,7 @@ const categoryMeta = [
   { label: "Beauty & Cosmetics", emoji: "💄" },
   { label: "Chocolates", emoji: "🍫" },
   { label: "Snacks", emoji: "🍿" },
-  { label: "Gutkha", emoji: "🌿" },
+  { label: "Mouth Freshener", emoji: "🌿" },
   { label: "Beverages", emoji: "🥤" },
   { label: "Water", emoji: "💧" },
   { label: "Spices", emoji: "🌶️" },
@@ -688,9 +688,16 @@ const setTheme = (theme) => {
   }
   if (elements.themeToggle) {
     elements.themeToggle.setAttribute("aria-pressed", String(state.theme === "dark"));
-    const icon = elements.themeToggle.querySelector(".icon");
-    if (icon) {
-      icon.textContent = state.theme === "dark" ? "☀️" : "🌙";
+    const sunIcon = elements.themeToggle.querySelector(".sun");
+    const moonIcon = elements.themeToggle.querySelector(".moon");
+    if (sunIcon && moonIcon) {
+      if (state.theme === "dark") {
+        sunIcon.style.display = "block";
+        moonIcon.style.display = "none";
+      } else {
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "block";
+      }
     }
   }
 };
